@@ -341,6 +341,7 @@ const _ajaxTable = [];
                                             $('tbody', that).empty();
                                             for (tr of json.data) $('tbody', that).append(tr);
                                             if(settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
+                                            _ajaxTable[i].page = 1;
                                             updateNav(pagination, _ajaxTable[i].page, Math.floor(json.total / 10) + 1, i);
                                             LOADER.disable();
                                             resolve();
@@ -354,6 +355,7 @@ const _ajaxTable = [];
                                         });
                                 } else {
                                     _ajaxTable[i].filteredData = _ajaxTable[i].data;
+                                    _ajaxTable[i].page = 1;
 
                                     $('tfoot input', that).filter((_, e) => e.value).each(function () {
                                         _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => $(tr).find('td').eq($(this).parent().index()).is('[data-search]') ? $(tr).find('td').eq($(this).parent().index()).attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || $(tr).find('td').eq($(this).parent().index()).text().toLowerCase().includes(this.value.toLowerCase()) : $(tr).find('td').eq($(this).parent().index()).text().toLowerCase().includes(this.value.toLowerCase()));
@@ -362,7 +364,7 @@ const _ajaxTable = [];
                                     _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
                                     
             
-                                    updateTable(that, i, that);
+                                    updateTable(that, i);
                                 }
                             });
     
