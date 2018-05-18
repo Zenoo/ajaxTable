@@ -67,6 +67,8 @@
   line-height: 28px;
   cursor: not-allowed;
   background: #fff;
+  min-width: fit-content;
+  min-width: -moz-fit-content;
 }
 .ajax-table-pagination ul li:first-of-type {
   border-top-left-radius: 2px;
