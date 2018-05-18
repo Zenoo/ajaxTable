@@ -59,14 +59,14 @@
 }
 .ajax-table-pagination ul li {
   display: inline-block;
-  border: 1px solid grey;
+  border: 1px solid #dddddd;
   border-right: none;
   height: 28px;
   width: 28px;
   text-align: center;
   line-height: 28px;
   cursor: not-allowed;
-  background: #dddddd;
+  background: #fff;
 }
 .ajax-table-pagination ul li:first-of-type {
   border-top-left-radius: 2px;
