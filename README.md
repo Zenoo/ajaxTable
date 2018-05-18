@@ -6,7 +6,7 @@ Handle your table display asynchronously
 
 * **Installation**
 
-ajaxTable uses the loader from [slick-loader](https://www.npmjs.com/package/slick-loader) 
+ajaxTable uses the loader from [slick-loader](https://www.npmjs.com/package/slick-loader)  
 Simply import JQuery, slick-loader & quickModal into your HTML.
 ```
 <link rel="stylesheet" href="slick-loader/slick-loader.css">
@@ -40,7 +40,7 @@ $('table').ajaxTable({
 
 * **Server configuration**
 
-If you use the ajax functionality, you'll need to setup your server to correctly answer to the AJAX calls.
+If you use the ajax functionality, you'll need to setup your server to correctly answer to the AJAX calls.  
 The data sent from your server should be a valid JSON like this :
 ```
 {
@@ -53,7 +53,7 @@ The data sent from your server should be a valid JSON like this :
 }
 ```
 
-The `data` property contains an Array of Strings representing each `<tr>`.
+The `data` property contains an Array of Strings representing each `<tr>`.  
 The `total` property contains the total amount of lines in your table.
 
 The data passed through the AJAX request looks like this
