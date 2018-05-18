@@ -79,6 +79,7 @@ const _ajaxTable = [];
                             orderBy: _ajaxTable[i].orderBy,
                             order: _ajaxTable[i].orderSort,
                             search: _ajaxTable[i].search,
+                            searchPatterns: _ajaxTable[i].searchPatterns,
                             columns: _ajaxTable[i].columns
                         })
                             .done(json => {
@@ -165,6 +166,7 @@ const _ajaxTable = [];
                     orderSort: settings.orderSort,
                     search: [],
                     activeSearch: false,
+                    searchPatterns: [],
                     columns: $('thead th',that).length,
                     page: 1,
                     total: 1,
@@ -211,6 +213,7 @@ const _ajaxTable = [];
                                 bundle.silentData["1"] = [...bundle.data];
                                 bundle.total = json.total;
                                 bundle.filteredTotal = json.total;
+                                bundle.searchPatterns = $('tbody tr:nth-of-type(1) td',that).get().map(e => e.getAttribute('data-search-template'));
                                 if(settings.logging) console.log('ajaxTable recieved ' + json.data.length + ' items.');
                                 LOADER.disable();
                                 resolve();
@@ -283,6 +286,7 @@ const _ajaxTable = [];
                                     orderBy: _ajaxTable[i].orderBy,
                                     order: _ajaxTable[i].orderSort,
                                     search: _ajaxTable[i].search,
+                                    searchPatterns: _ajaxTable[i].searchPatterns,
                                     columns: _ajaxTable[i].columns
                                 })
                                     .done(json => {
@@ -329,6 +333,7 @@ const _ajaxTable = [];
                                         orderBy: _ajaxTable[i].orderBy,
                                         order: _ajaxTable[i].orderSort,
                                         search: _ajaxTable[i].search,
+                                        searchPatterns: _ajaxTable[i].searchPatterns,
                                         columns: bundle.columns,
                                         total: true
                                     })
