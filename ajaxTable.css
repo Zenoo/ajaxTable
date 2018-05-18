@@ -66,6 +66,7 @@
   text-align: center;
   line-height: 28px;
   cursor: not-allowed;
+  background: #dddddd;
 }
 .ajax-table-pagination ul li:first-of-type {
   border-top-left-radius: 2px;
