@@ -8,7 +8,7 @@ const _ajaxTable = [];
                 printButtons: true,
                 orderBy: 0,
                 orderSort: 'desc',
-                logging: true,
+                logging: false,
                 onReady: function (table, data) { },
                 beforeAjax: function (table, data) { },
                 onUpdate: function (table, data) { }

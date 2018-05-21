@@ -33,7 +33,7 @@ $('table').ajaxTable({
   printButtons: true,      // Should the print buttons be displayed?
   orderBy: 0,              // Index of the column used to order the table
   orderSort: 'desc',       // Order direction
-  logging: true,           // Should ajaxTable use the developper console?
+  logging: false,           // Should ajaxTable use the developper console?
   onReady: function (table, data) { },     // Runs when the ajaxTable is ready
   beforeAjax: function (table, data) { },  // Runs before every AJAX call
   onUpdate: function (table, data) { }     // Runs after every table update
