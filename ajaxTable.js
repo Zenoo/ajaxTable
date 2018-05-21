@@ -17,61 +17,61 @@ const _ajaxTable = [];
             let settings = $.extend({}, this.defaultOptions, options);
 
             //UTILITIES
-            var mergeSort = function(array, comparefn) {
+            function mergeSort(array, comparefn) {
                 function merge(arr, aux, lo, mid, hi, comparefn) {
-                  var i = lo;
-                  var j = mid + 1;
-                  var k = lo;
-                  while(true){
-                    var cmp = comparefn(arr[i], arr[j]);
-                    if(cmp <= 0){
-                      aux[k++] = arr[i++];
-                      if(i > mid){
-                        do
-                          aux[k++] = arr[j++];
-                        while(j <= hi);
-                        break;
-                      }
-                    } else {
-                      aux[k++] = arr[j++];
-                      if(j > hi){
-                        do
-                          aux[k++] = arr[i++];
-                        while(i <= mid);
-                        break;
-                      }
+                    var i = lo;
+                    var j = mid + 1;
+                    var k = lo;
+                    while (true) {
+                        var cmp = comparefn(arr[i], arr[j]);
+                        if (cmp <= 0) {
+                            aux[k++] = arr[i++];
+                            if (i > mid) {
+                                do
+                                    aux[k++] = arr[j++];
+                                while (j <= hi);
+                                break;
+                            }
+                        } else {
+                            aux[k++] = arr[j++];
+                            if (j > hi) {
+                                do
+                                    aux[k++] = arr[i++];
+                                while (i <= mid);
+                                break;
+                            }
+                        }
                     }
-                  }
                 }
-              
+
                 function sortarrtoaux(arr, aux, lo, hi, comparefn) {
-                  if (hi < lo) return;
-                  if (hi == lo){
-                      aux[lo] = arr[lo];
-                      return;
-                  }
-                  var mid = Math.floor(lo + (hi - lo) / 2);
-                  sortarrtoarr(arr, aux, lo, mid, comparefn);
-                  sortarrtoarr(arr, aux, mid + 1, hi, comparefn);
-                  merge(arr, aux, lo, mid, hi, comparefn);
+                    if (hi < lo) return;
+                    if (hi == lo) {
+                        aux[lo] = arr[lo];
+                        return;
+                    }
+                    var mid = Math.floor(lo + (hi - lo) / 2);
+                    sortarrtoarr(arr, aux, lo, mid, comparefn);
+                    sortarrtoarr(arr, aux, mid + 1, hi, comparefn);
+                    merge(arr, aux, lo, mid, hi, comparefn);
                 }
-              
+
                 function sortarrtoarr(arr, aux, lo, hi, comparefn) {
-                  if (hi <= lo) return;
-                  var mid = Math.floor(lo + (hi - lo) / 2);
-                  sortarrtoaux(arr, aux, lo, mid, comparefn);
-                  sortarrtoaux(arr, aux, mid + 1, hi, comparefn);
-                  merge(aux, arr, lo, mid, hi, comparefn);
+                    if (hi <= lo) return;
+                    var mid = Math.floor(lo + (hi - lo) / 2);
+                    sortarrtoaux(arr, aux, lo, mid, comparefn);
+                    sortarrtoaux(arr, aux, mid + 1, hi, comparefn);
+                    merge(aux, arr, lo, mid, hi, comparefn);
                 }
-              
+
                 function merge_sort(arr, comparefn) {
-                  var aux = arr.slice(0);
-                  sortarrtoarr(arr, aux, 0, arr.length - 1, comparefn);
-                  return arr;
+                    var aux = arr.slice(0);
+                    sortarrtoarr(arr, aux, 0, arr.length - 1, comparefn);
+                    return arr;
                 }
-              
+
                 return merge_sort(array, comparefn);
-              }
+            }
 
             function htmlToElement(html) {
                 var template = document.createElement('template');
@@ -79,7 +79,7 @@ const _ajaxTable = [];
                 template.innerHTML = html;
                 return template.content.firstChild;
             }
-            
+
             function paginationDisplay(currentPage, pageCount) {
                 let delta = 2,
                     left = currentPage - delta,
@@ -130,12 +130,12 @@ const _ajaxTable = [];
                 updateNav($(table).nextAll('.ajax-table-pagination').eq(0), _ajaxTable[i].page, pageCount, i);
             }
 
-            function paginationHandler(table, i, targetedPage, pagination, pageCount){
+            function paginationHandler(table, i, targetedPage, pagination, pageCount) {
                 let dataGathering = new Promise((resolve, reject) => {
                     //        AJAX      &&        NOT FULLY LOADED        && ((         NO FILTER          &&              NOT STORED               ) ||           FILTER          )
                     if (settings.source && !_ajaxTable[i].dataFullyLoaded && ((!_ajaxTable[i].activeSearch && !_ajaxTable[i].silentData[targetedPage]) || _ajaxTable[i].activeSearch)) {
                         settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
-                        if(settings.logging) console.log('ajaxTable calling source...');
+                        if (settings.logging) console.log('ajaxTable calling source...');
                         LOADER.enable();
                         $.getJSON(settings.source, {
                             page: targetedPage,
@@ -151,11 +151,11 @@ const _ajaxTable = [];
                                 for (tr of json.data) $('tbody', table).append(tr);
 
                                 //          NO FILTER          &&                                          NO SORT
-                                if(!_ajaxTable[i].activeSearch &&  (_ajaxTable[i].orderBy == settings.orderBy && _ajaxTable[i].orderSort == settings.orderSort)){
+                                if (!_ajaxTable[i].activeSearch && (_ajaxTable[i].orderBy == settings.orderBy && _ajaxTable[i].orderSort == settings.orderSort)) {
                                     _ajaxTable[i].silentData["" + targetedPage] = json.data.map(e => htmlToElement(e));
-                                    if(settings.logging) console.log('ajaxTable recieved ' + json.data.length + ' items.');
-                                }else{
-                                    if(settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
+                                    if (settings.logging) console.log('ajaxTable recieved ' + json.data.length + ' items.');
+                                } else {
+                                    if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                 }
                                 LOADER.disable();
                                 resolve(json.total);
@@ -167,11 +167,11 @@ const _ajaxTable = [];
                                 LOADER.disable();
                                 reject(err);
                             });
-                    //              AJAX      &&        NOT FULLY LOADED        &&               STORED
-                    }else if (settings.source && !_ajaxTable[i].dataFullyLoaded && _ajaxTable[i].silentData[targetedPage]) {
+                        //              AJAX      &&        NOT FULLY LOADED        &&               STORED
+                    } else if (settings.source && !_ajaxTable[i].dataFullyLoaded && _ajaxTable[i].silentData[targetedPage]) {
                         $('tbody', table).empty().append(_ajaxTable[i].silentData[targetedPage]);
                         resolve(_ajaxTable[i].total);
-                    }else{
+                    } else {
                         $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((targetedPage - 1) * 10, targetedPage * 10));
                         resolve(_ajaxTable[i].filteredData.length);
                     }
@@ -179,24 +179,24 @@ const _ajaxTable = [];
 
                 dataGathering.then(items => {
                     _ajaxTable[i].page = targetedPage;
-                    updateNav(pagination, targetedPage, Math.floor((items - 1)  / 10) + 1, i);
+                    updateNav(pagination, targetedPage, Math.floor((items - 1) / 10) + 1, i);
                     settings.onUpdate.call(undefined, table, _ajaxTable[i]);
                 }).catch(err => {
                     alert(err);
                 });
             }
 
-            function silentLoad(page, i, table){
+            function silentLoad(page, i, table) {
                 settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
-                if(settings.logging) console.log('ajaxTable calling source...');
+                if (settings.logging) console.log('ajaxTable calling source...');
                 $.getJSON(settings.source, {
                     page: page
                 })
                     .done(json => {
                         _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
-                        if(settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items.');
-                        if(page < (Math.floor((_ajaxTable[i].total - 1) / 10) + 1)) silentLoad(page+1,i);
-                        else{
+                        if (settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items.');
+                        if (page < (Math.floor((_ajaxTable[i].total - 1) / 10) + 1)) silentLoad(page + 1, i);
+                        else {
                             _ajaxTable[i].dataFullyLoaded = true;
                             _ajaxTable[i].data = [].concat(...Object.values(_ajaxTable[i].silentData));
                             _ajaxTable[i].filteredData = _ajaxTable[i].data;
@@ -205,10 +205,10 @@ const _ajaxTable = [];
                                 let index = $(this).parent().index();
                                 _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
                             });
-    
+
                             _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
 
-                            if(settings.logging) console.log('ajaxTable is done with AJAX tasks.');
+                            if (settings.logging) console.log('ajaxTable is done with AJAX tasks.');
                         }
 
                     })
@@ -216,8 +216,15 @@ const _ajaxTable = [];
                         let err = "Request Failed: " + textStatus + ", " + error;
                         console.log(_);
                         console.log(err);
-                        silentLoad(page,i);
+                        silentLoad(page, i);
                     });
+            }
+
+            function saveState(i){
+                localStorage.setItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_search', JSON.stringify(_ajaxTable[i].search));
+                localStorage.setItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_orderBy', JSON.stringify(_ajaxTable[i].orderBy));
+                localStorage.setItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_order', JSON.stringify(_ajaxTable[i].orderSort));
+                localStorage.setItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_expires', new Date().getTime() + 1000 * 60 * 60);
             }
 
             //MAIN LOOP
@@ -232,7 +239,7 @@ const _ajaxTable = [];
                     search: [],
                     activeSearch: false,
                     searchPatterns: [],
-                    columns: $('thead th',that).length,
+                    columns: $('thead th', that).length,
                     page: 1,
                     total: 1,
                     filteredTotal: 1,
@@ -252,9 +259,9 @@ const _ajaxTable = [];
                 $('tfoot tr', this).empty();
                 let lang = window.navigator.userLanguage || window.navigator.language;
                 $('thead th', this).each(function () {
-                    $('tfoot tr', that).append('<td><input type="text" placeholder="'+(lang.toLowerCase().includes('fr') ? "Entrée pour chercher" : "Enter to search")+'"></td>')
+                    $('tfoot tr', that).append('<td><input type="text" placeholder="' + (lang.toLowerCase().includes('fr') ? "Entrée pour chercher" : "Enter to search") + '"></td>')
                 });
-                bundle.search = $('tfoot input',that).get().map(e => e.value);
+                bundle.search = $('tfoot input', that).get().map(e => e.value);
 
                 //Only keep 10 items shown
                 if (bundle.data.length > 10) {
@@ -265,9 +272,9 @@ const _ajaxTable = [];
                     //Load items from AJAX
                     if (settings.source) {
                         settings.beforeAjax.call(undefined, that, bundle);
-                        if(settings.logging) console.log('ajaxTable calling source...');
-                        LOADER.enable();
+                        if (settings.logging) console.log('ajaxTable calling source...');
 
+                        LOADER.enable();
                         $.getJSON(settings.source, {
                             total: true,
                         })
@@ -279,8 +286,8 @@ const _ajaxTable = [];
                                 bundle.silentData["1"] = [...bundle.data];
                                 bundle.total = json.total;
                                 bundle.filteredTotal = json.total;
-                                bundle.searchPatterns = $('tbody tr:nth-of-type(1) td',that).get().map(e => e.getAttribute('data-search-template'));
-                                if(settings.logging) console.log('ajaxTable recieved ' + json.data.length + ' items.');
+                                bundle.searchPatterns = $('tbody tr:nth-of-type(1) td', that).get().map(e => e.getAttribute('data-search-template'));
+                                if (settings.logging) console.log('ajaxTable recieved ' + json.data.length + ' items.');
                                 LOADER.disable();
                                 resolve();
                             })
@@ -303,9 +310,9 @@ const _ajaxTable = [];
                     _ajaxTable.push(bundle);
 
                     //INITIAL SORTING DISPLAY
-                    let orderedColumn = $('thead th',that).eq(_ajaxTable[i].orderBy);
+                    let orderedColumn = $('thead th', that).eq(_ajaxTable[i].orderBy);
                     orderedColumn.addClass('sorted');
-                    if(_ajaxTable[i].orderSort == 'asc') orderedColumn.addClass('inverted');
+                    if (_ajaxTable[i].orderSort == 'asc') orderedColumn.addClass('inverted');
 
                     //PAGINATION
                     let pagination = $('<aside class="ajax-table-pagination"><ul><li class="pagination-prev disabled">&laquo;</li><li class="pagination-next">&raquo;</li></ul></aside>');
@@ -345,7 +352,7 @@ const _ajaxTable = [];
                         let sortingPromise = new Promise((resolve, reject) => {
                             if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
-                                if(settings.logging) console.log('ajaxTable calling source...');
+                                if (settings.logging) console.log('ajaxTable calling source...');
                                 LOADER.enable();
                                 $.getJSON(settings.source, {
                                     page: _ajaxTable[i].page,
@@ -358,7 +365,7 @@ const _ajaxTable = [];
                                     .done(json => {
                                         $('tbody', that).empty();
                                         for (tr of json.data) $('tbody', that).append(tr);
-                                        if(settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
+                                        if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                         LOADER.disable();
                                         resolve();
                                     })
@@ -384,11 +391,12 @@ const _ajaxTable = [];
 
                                 updateTable(that, i);
                                 resolve();
-                                
+
                             }
                         });
 
                         sortingPromise.then(() => {
+                            saveState(i);
                             settings.onUpdate.call(undefined, that, _ajaxTable[i]);
                         }).catch(error => {
                             alert(error);
@@ -396,15 +404,15 @@ const _ajaxTable = [];
                     });
 
                     //Search handler
-                    $('tfoot input', this).on('keyup blur', function(e){
-                        if(e.keyCode == 13 || e.type == 'blur' && this.value != _ajaxTable[i].search[$(this).parent().index()]){
+                    $('tfoot input', this).on('keyup blur', function (e) {
+                        if (e.keyCode == 13 || e.type == 'blur' && this.value != _ajaxTable[i].search[$(this).parent().index()]) {
                             _ajaxTable[i].search[$(this).parent().index()] = this.value;
                             _ajaxTable[i].activeSearch = !!_ajaxTable[i].search.filter(e => e.length).length;
 
                             let searchPromise = new Promise((resolve, reject) => {
                                 if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
                                     settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
-                                    if(settings.logging) console.log('ajaxTable calling source...');
+                                    if (settings.logging) console.log('ajaxTable calling source...');
                                     LOADER.enable();
                                     $.getJSON(settings.source, {
                                         page: _ajaxTable[i].page,
@@ -412,13 +420,13 @@ const _ajaxTable = [];
                                         order: _ajaxTable[i].orderSort,
                                         search: _ajaxTable[i].search,
                                         searchPatterns: _ajaxTable[i].searchPatterns,
-                                        columns: bundle.columns,
+                                        columns: _ajaxTable[i].columns,
                                         total: true
                                     })
                                         .done(json => {
                                             $('tbody', that).empty();
                                             for (tr of json.data) $('tbody', that).append(tr);
-                                            if(settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
+                                            if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                             _ajaxTable[i].page = 1;
                                             updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                             LOADER.disable();
@@ -439,15 +447,16 @@ const _ajaxTable = [];
                                         let index = $(this).parent().index();
                                         _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
                                     });
-            
+
                                     _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
-                                    
-            
+
+
                                     updateTable(that, i);
                                 }
                             });
-    
+
                             searchPromise.then(() => {
+                                saveState(i);
                                 settings.onUpdate.call(undefined, that, _ajaxTable[i]);
                             }).catch(error => {
                                 alert(error);
@@ -456,10 +465,77 @@ const _ajaxTable = [];
                     });
 
                     //TABLE READY
-                    if(settings.logging) console.log('ajaxTable ready.');
+                    if (settings.logging) console.log('ajaxTable ready.');
                     settings.onReady.call(undefined, that, _ajaxTable[i]);
 
-                    if(Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1) silentLoad(2,i);
+                    //Reuse user's last sort + filter
+                    let storageExpiresAt = localStorage.getItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_expires');
+                    if(storageExpiresAt){
+                        if(new Date().getTime() < storageExpiresAt){
+                            _ajaxTable[i].search = JSON.parse(localStorage.getItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_search'));
+                            _ajaxTable[i].orderBy = +JSON.parse(localStorage.getItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_orderBy'));
+                            _ajaxTable[i].orderSort = JSON.parse(localStorage.getItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_order'));
+
+                            //Displays searches
+                            $('tfoot input', that).each(function(j){
+                                this.value = _ajaxTable[i].search[j];
+                            });
+
+                            //Displays sorting
+                            let orderedColumn = $('thead th', that).eq(_ajaxTable[i].orderBy);
+                            orderedColumn.addClass('sorted');
+                            if (_ajaxTable[i].orderSort == 'asc') orderedColumn.addClass('inverted');
+
+                            if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
+                                settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
+                                if (settings.logging) console.log('ajaxTable calling source...');
+                                LOADER.enable();
+                                $.getJSON(settings.source, {
+                                    page: _ajaxTable[i].page,
+                                    orderBy: _ajaxTable[i].orderBy,
+                                    order: _ajaxTable[i].orderSort,
+                                    search: _ajaxTable[i].search,
+                                    searchPatterns: _ajaxTable[i].searchPatterns,
+                                    columns: _ajaxTable[i].columns,
+                                    total: true
+                                })
+                                    .done(json => {
+                                        $('tbody', that).empty();
+                                        for (tr of json.data) $('tbody', that).append(tr);
+                                        if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
+                                        _ajaxTable[i].page = 1;
+                                        updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
+                                        LOADER.disable();
+                                    })
+                                    .fail((_, textStatus, error) => {
+                                        let err = "Request Failed: " + textStatus + ", " + error;
+                                        console.log(_);
+                                        console.log(err);
+                                        LOADER.disable();
+                                    });
+                            } else {
+                                _ajaxTable[i].filteredData = _ajaxTable[i].data;
+                                _ajaxTable[i].page = 1;
+
+                                $('tfoot input', that).filter((_, e) => e.value).each(function () {
+                                    let index = $(this).parent().index();
+                                    _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
+                                });
+
+                                _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
+
+                                updateTable(that, i);
+                            }
+                        }else{
+                            localStorage.removeItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_search');
+                            localStorage.removeItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_orderBy');
+                            localStorage.removeItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_order');
+                            localStorage.removeItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_expires');
+                            storageExpiresAt = null;
+                        }
+                    }
+
+                    if (Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1) silentLoad(2, i);
                     else _ajaxTable[i].dataFullyLoaded = true;
                 }).catch(err => {
                     alert(err);
