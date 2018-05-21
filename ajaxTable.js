@@ -362,7 +362,7 @@ const _ajaxTable = [];
                                     iframe.contents().find('head').append('<link rel="stylesheet" href="https://raw.githubusercontent.com/Zenoo/ajaxTable/master/ajaxTable.css">');
                                     
                                     iframe[0].contentWindow.print();
-                                    iframe.remove();
+                                    // iframe.remove();
                                     break;
                                 default:
                                     break;
