@@ -114,3 +114,121 @@
 .ajax-table-utilities .ajax-table-pagination {
   text-align: right;
 }
+@media print {
+  .ajax-table-processed {
+    width: 100%;
+    border-collapse: separate;
+    border: 1px solid #dddddd;
+    border-spacing: 0;
+    font-family: sans-serif;
+  }
+  .ajax-table-processed thead tr th {
+    position: relative;
+    border: 1px solid #dddddd;
+    border-top: none;
+    padding: 8px;
+    padding-right: 30px;
+    cursor: pointer;
+    background: #bbbbbb;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+  .ajax-table-processed thead tr th:after {
+    position: absolute;
+    right: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '\2193';
+    opacity: 0.5;
+  }
+  .ajax-table-processed thead tr th.sorted:after {
+    opacity: 1;
+  }
+  .ajax-table-processed thead tr th.sorted.inverted:after {
+    content: '\2191';
+  }
+  .ajax-table-processed tfoot {
+    display: table-header-group;
+  }
+  .ajax-table-processed tfoot tr td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    background: #bbbbbb;
+  }
+  .ajax-table-processed tfoot tr td input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+    font-weight: bold;
+  }
+  .ajax-table-processed tbody tr:last-of-type td {
+    border-bottom: none;
+  }
+  .ajax-table-processed tbody tr td {
+    border-left: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding: 8px;
+  }
+  .ajax-table-processed tbody tr td:first-of-type {
+    border-left: none;
+  }
+  .ajax-table-utilities .ajax-table-pagination,
+  .ajax-table-utilities .ajax-table-buttons {
+    display: inline-block;
+    width: 50%;
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+  }
+  .ajax-table-utilities .ajax-table-pagination ul,
+  .ajax-table-utilities .ajax-table-buttons ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .ajax-table-utilities .ajax-table-pagination ul li,
+  .ajax-table-utilities .ajax-table-buttons ul li {
+    display: inline-block;
+    border: 1px solid #dddddd;
+    border-right: none;
+    height: 28px;
+    width: 28px;
+    text-align: center;
+    line-height: 28px;
+    cursor: not-allowed;
+    background: #fff;
+    min-width: fit-content;
+    min-width: -moz-fit-content;
+    padding: 0 5px;
+  }
+  .ajax-table-utilities .ajax-table-pagination ul li:first-of-type,
+  .ajax-table-utilities .ajax-table-buttons ul li:first-of-type {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+  .ajax-table-utilities .ajax-table-pagination ul li:last-of-type,
+  .ajax-table-utilities .ajax-table-buttons ul li:last-of-type {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-right: 1px solid #dddddd;
+  }
+  .ajax-table-utilities .ajax-table-pagination ul li.pagination-page,
+  .ajax-table-utilities .ajax-table-buttons ul li.pagination-page,
+  .ajax-table-utilities .ajax-table-pagination ul li.pagination-prev:not(.disabled),
+  .ajax-table-utilities .ajax-table-buttons ul li.pagination-prev:not(.disabled),
+  .ajax-table-utilities .ajax-table-pagination ul li.pagination-next:not(.disabled),
+  .ajax-table-utilities .ajax-table-buttons ul li.pagination-next:not(.disabled),
+  .ajax-table-utilities .ajax-table-pagination ul li.export,
+  .ajax-table-utilities .ajax-table-buttons ul li.export {
+    cursor: pointer;
+  }
+  .ajax-table-utilities .ajax-table-pagination ul li.active,
+  .ajax-table-utilities .ajax-table-buttons ul li.active {
+    background: rgba(128, 128, 128, 0.4);
+  }
+  .ajax-table-utilities .ajax-table-pagination ul li.disabled,
+  .ajax-table-utilities .ajax-table-buttons ul li.disabled {
+    color: grey;
+  }
+  .ajax-table-utilities .ajax-table-pagination {
+    text-align: right;
+  }
+}

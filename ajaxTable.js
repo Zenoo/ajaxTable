@@ -359,6 +359,7 @@ const _ajaxTable = [];
                                     tableToPDF = $(that).clone();
                                     $('tfoot',tableToPDF).remove();
                                     iframe.contents().find('body').append(tableToPDF);
+                                    iframe.contents().find('head').append('<link rel="stylesheet" href="https://raw.githubusercontent.com/Zenoo/ajaxTable/master/ajaxTable.css">');
                                     
                                     iframe[0].contentWindow.print();
                                     iframe.remove();
