@@ -6,13 +6,15 @@ Handle your table display asynchronously
 
 * **Installation**
 
-ajaxTable uses the loader from [slick-loader](https://www.npmjs.com/package/slick-loader)  
-Simply import JQuery, slick-loader & quickModal into your HTML.
+ajaxTable uses [slick-loader](https://www.npmjs.com/package/slick-loader), [csvexporter](https://www.npmjs.com/package/csvexporter) and [jQuery-excel-exporter](https://www.npmjs.com/package/jquery-excel-exporter)  
+Simply import JQuery, those 3 packages & ajaxTable into your HTML.
 ```
 <link rel="stylesheet" href="slick-loader/slick-loader.css">
 <link rel="stylesheet" href="ajaxTable.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="slick-loader/slick-loader.js"></script>
+<script type="text/javascript" src="csv-exporter/csvExport.js"></script>
+<script type="text/javascript" src="jquery-excel-export/excel-export.js"></script>
 <script type="text/javascript" src="ajaxTable.js"></script>
 ```
 * **How to use**
