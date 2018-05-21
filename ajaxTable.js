@@ -370,27 +370,19 @@ const _ajaxTable = [];
                                     });
                             } else {
                                 let index = $(this).index();
-                                // LOADER.enable();
 
-                                // setTimeout(() => {
-                                    console.log("start");
-                                    let then = new Date();
+                                _ajaxTable[i].filteredData = mergeSort(_ajaxTable[i].filteredData, (a, b) => {
+                                    let $a_dataOrder = a.childNodes[index].getAttribute('data-order');
+                                    let $b_dataOrder = b.childNodes[index].getAttribute('data-order');
 
-                                    _ajaxTable[i].filteredData = mergeSort(_ajaxTable[i].filteredData, (a, b) => {
-                                        let $a_dataOrder = a.childNodes[index].getAttribute('data-order');
-                                        let $b_dataOrder = b.childNodes[index].getAttribute('data-order');
+                                    let $a_text = a.childNodes[index].innerText;
+                                    let $b_text = b.childNodes[index].innerText;
 
-                                        let $a_text = a.childNodes[index].innerText;
-                                        let $b_text = b.childNodes[index].innerText;
+                                    return a.childNodes[index].hasAttribute('data-order') ? ($a_dataOrder > $b_dataOrder ? order : $a_dataOrder == $b_dataOrder ? 0 : -order) : ($a_text > $b_text ? order : $a_text == $b_text ? 0 : -order)
+                                });
 
-                                        return a.childNodes[index].hasAttribute('data-order') ? ($a_dataOrder > $b_dataOrder ? order : $a_dataOrder == $b_dataOrder ? 0 : -order) : ($a_text > $b_text ? order : $a_text == $b_text ? 0 : -order)
-                                    });
-
-                                    console.log("end. Sort took "+(new Date - then));
-                                    // LOADER.disable();
-                                    updateTable(that, i);
-                                    resolve();
-                                // },501);
+                                updateTable(that, i);
+                                resolve();
                                 
                             }
                         });
