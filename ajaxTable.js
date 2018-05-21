@@ -17,6 +17,69 @@ const _ajaxTable = [];
             let settings = $.extend({}, this.defaultOptions, options);
 
             //UTILITIES
+            var mergeSort = function(array, comparefn) {
+                function merge(arr, aux, lo, mid, hi, comparefn) {
+                  var i = lo;
+                  var j = mid + 1;
+                  var k = lo;
+                  while(true){
+                    var cmp = comparefn(arr[i], arr[j]);
+                    if(cmp <= 0){
+                      aux[k++] = arr[i++];
+                      if(i > mid){
+                        do
+                          aux[k++] = arr[j++];
+                        while(j <= hi);
+                        break;
+                      }
+                    } else {
+                      aux[k++] = arr[j++];
+                      if(j > hi){
+                        do
+                          aux[k++] = arr[i++];
+                        while(i <= mid);
+                        break;
+                      }
+                    }
+                  }
+                }
+              
+                function sortarrtoaux(arr, aux, lo, hi, comparefn) {
+                  if (hi < lo) return;
+                  if (hi == lo){
+                      aux[lo] = arr[lo];
+                      return;
+                  }
+                  var mid = Math.floor(lo + (hi - lo) / 2);
+                  sortarrtoarr(arr, aux, lo, mid, comparefn);
+                  sortarrtoarr(arr, aux, mid + 1, hi, comparefn);
+                  merge(arr, aux, lo, mid, hi, comparefn);
+                }
+              
+                function sortarrtoarr(arr, aux, lo, hi, comparefn) {
+                  if (hi <= lo) return;
+                  var mid = Math.floor(lo + (hi - lo) / 2);
+                  sortarrtoaux(arr, aux, lo, mid, comparefn);
+                  sortarrtoaux(arr, aux, mid + 1, hi, comparefn);
+                  merge(aux, arr, lo, mid, hi, comparefn);
+                }
+              
+                function merge_sort(arr, comparefn) {
+                  var aux = arr.slice(0);
+                  sortarrtoarr(arr, aux, 0, arr.length - 1, comparefn);
+                  return arr;
+                }
+              
+                return merge_sort(array, comparefn);
+              }
+
+            function htmlToElement(html) {
+                var template = document.createElement('template');
+                html = html.trim();
+                template.innerHTML = html;
+                return template.content.firstChild;
+            }
+            
             function paginationDisplay(currentPage, pageCount) {
                 let delta = 2,
                     left = currentPage - delta,
@@ -62,7 +125,7 @@ const _ajaxTable = [];
             }
 
             function updateTable(table, i) {
-                $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((_ajaxTable[i].page - 1) * 10, _ajaxTable[i].page * 10).join(''));
+                $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((_ajaxTable[i].page - 1) * 10, _ajaxTable[i].page * 10));
                 let pageCount = Math.floor(_ajaxTable[i].filteredTotal / 10) + 1;
                 updateNav($(table).nextAll('.ajax-table-pagination').eq(0), _ajaxTable[i].page, pageCount, i);
             }
@@ -88,7 +151,7 @@ const _ajaxTable = [];
 
                                 //          NO FILTER          &&                                          NO SORT
                                 if(!_ajaxTable[i].activeSearch &&  (_ajaxTable[i].orderBy == settings.orderBy && _ajaxTable[i].orderSort == settings.orderSort)){
-                                    _ajaxTable[i].silentData["" + targetedPage] = json.data;
+                                    _ajaxTable[i].silentData["" + targetedPage] = json.data.map(e => htmlToElement(e));
                                     if(settings.logging) console.log('ajaxTable recieved ' + json.data.length + ' items.');
                                 }else{
                                     if(settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
@@ -105,10 +168,10 @@ const _ajaxTable = [];
                             });
                     //              AJAX      &&        NOT FULLY LOADED        &&               STORED
                     }else if (settings.source && !_ajaxTable[i].dataFullyLoaded && _ajaxTable[i].silentData[targetedPage]) {
-                        $('tbody', table).empty().append(_ajaxTable[i].silentData[targetedPage].join(''));
+                        $('tbody', table).empty().append(_ajaxTable[i].silentData[targetedPage]);
                         resolve();
                     }else{
-                        $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((targetedPage - 1) * 10, targetedPage * 10).join(''));
+                        $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((targetedPage - 1) * 10, targetedPage * 10));
                         resolve();
                     }
                 });
@@ -129,7 +192,7 @@ const _ajaxTable = [];
                     page: page
                 })
                     .done(json => {
-                        _ajaxTable[i].silentData["" + page] = json.data;
+                        _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
                         if(settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items.');
                         if(page < (Math.floor(_ajaxTable[i].total / 10) + 1)) silentLoad(page+1,i);
                         else{
@@ -138,7 +201,8 @@ const _ajaxTable = [];
                             _ajaxTable[i].filteredData = _ajaxTable[i].data;
 
                             $('tfoot input', table).filter((_, e) => e.value).each(function () {
-                                _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => $(tr).find('td').eq($(this).parent().index()).is('[data-search]') ? $(tr).find('td').eq($(this).parent().index()).attr('data-search').includes(this.value) || $(tr).find('td').eq($(this).parent().index()).text().includes(this.value) : $(tr).find('td').eq($(this).parent().index()).text().includes(this.value));
+                                let index = $(this).parent().index();
+                                _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
                             });
     
                             _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
@@ -178,15 +242,16 @@ const _ajaxTable = [];
                     dataFullyLoaded: false
                 };
 
-                bundle.data = $('tbody>tr', this).get().map(e => e.outerHTML.replace(/[\n\t]| +/g, ' '));
+                bundle.data = $('tbody>tr', this).get();
                 bundle.filteredData = [...bundle.data];
 
                 //Search fields display
                 if (!$('tfoot', this).length) $(this).append('<tfoot><tr></tr></tfoot>');
                 $('tfoot', this).insertAfter($('thead', this));
                 $('tfoot tr', this).empty();
+                let lang = window.navigator.userLanguage || window.navigator.language;
                 $('thead th', this).each(function () {
-                    $('tfoot tr', that).append('<td><input type="text" placeholder="Entrée pour chercher"></td>')
+                    $('tfoot tr', that).append('<td><input type="text" placeholder="'+(lang.toLowerCase().includes('fr') ? "Entrée pour chercher" : "Enter to search")+'"></td>')
                 });
                 bundle.search = $('tfoot input',that).get().map(e => e.value);
 
@@ -208,7 +273,7 @@ const _ajaxTable = [];
                             .done(json => {
                                 $('tbody', this).empty();
                                 for (tr of json.data) $('tbody', this).append(tr);
-                                bundle.data = json.data;
+                                bundle.data = json.data.map(e => htmlToElement(e));
                                 bundle.filteredData = [...bundle.data];
                                 bundle.silentData["1"] = [...bundle.data];
                                 bundle.total = json.total;
@@ -304,9 +369,29 @@ const _ajaxTable = [];
                                         reject(err);
                                     });
                             } else {
-                                _ajaxTable[i].filteredData.sort((a, b) => $(a).children().eq($(this).index()).is('[data-order]') ? ($(a).children().eq($(this).index()).attr('data-order') > $(b).children().eq($(this).index()).attr('data-order') ? order : $(a).children().eq($(this).index()).attr('data-order') == $(b).children().eq($(this).index()).attr('data-order') ? 0 : -order) : ($(a).children().eq($(this).index()).text() > $(b).children().eq($(this).index()).text() ? order : $(a).children().eq($(this).index()).text() == $(b).children().eq($(this).index()).text() ? 0 : -order));  
-                                updateTable(that, i);
-                                resolve();
+                                let index = $(this).index();
+                                // LOADER.enable();
+
+                                // setTimeout(() => {
+                                    console.log("start");
+                                    let then = new Date();
+
+                                    _ajaxTable[i].filteredData = mergeSort(_ajaxTable[i].filteredData, (a, b) => {
+                                        let $a_dataOrder = a.childNodes[index].getAttribute('data-order');
+                                        let $b_dataOrder = b.childNodes[index].getAttribute('data-order');
+
+                                        let $a_text = a.childNodes[index].innerText;
+                                        let $b_text = b.childNodes[index].innerText;
+
+                                        return a.childNodes[index].hasAttribute('data-order') ? ($a_dataOrder > $b_dataOrder ? order : $a_dataOrder == $b_dataOrder ? 0 : -order) : ($a_text > $b_text ? order : $a_text == $b_text ? 0 : -order)
+                                    });
+
+                                    console.log("end. Sort took "+(new Date - then));
+                                    // LOADER.disable();
+                                    updateTable(that, i);
+                                    resolve();
+                                // },501);
+                                
                             }
                         });
 
@@ -321,7 +406,7 @@ const _ajaxTable = [];
                     $('tfoot input', this).on('keyup blur', function(e){
                         if(e.keyCode == 13 || e.type == 'blur' && this.value != _ajaxTable[i].search[$(this).parent().index()]){
                             _ajaxTable[i].search[$(this).parent().index()] = this.value;
-                            _ajaxTable[i].activeSearch = _ajaxTable[i].search.filter((_, e) => e.value).length ? true : false;
+                            _ajaxTable[i].activeSearch = !!_ajaxTable[i].search.filter(e => e.length).length;
 
                             let searchPromise = new Promise((resolve, reject) => {
                                 if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
@@ -358,7 +443,8 @@ const _ajaxTable = [];
                                     _ajaxTable[i].page = 1;
 
                                     $('tfoot input', that).filter((_, e) => e.value).each(function () {
-                                        _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => $(tr).find('td').eq($(this).parent().index()).is('[data-search]') ? $(tr).find('td').eq($(this).parent().index()).attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || $(tr).find('td').eq($(this).parent().index()).text().toLowerCase().includes(this.value.toLowerCase()) : $(tr).find('td').eq($(this).parent().index()).text().toLowerCase().includes(this.value.toLowerCase()));
+                                        let index = $(this).parent().index();
+                                        _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
                                     });
             
                                     _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
