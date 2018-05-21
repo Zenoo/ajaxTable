@@ -19,6 +19,7 @@
                 cursor: pointer;
                 background: @header;
                 font-weight: bold;
+                vertical-align: middle;
 
                 &:after{
                     position: absolute;
@@ -84,48 +85,60 @@
     }
 }
 
-//PAGINATION
-.ajax-table-pagination{
-    ul{
-        list-style-type: none;
+.ajax-table-utilities{
+    //PAGINATION
+    .ajax-table-pagination,.ajax-table-buttons{
+        display: inline-block;
+        width: 50%;
+        min-width: -moz-fit-content;
+        min-width: fit-content;
+        ul{
+            list-style-type: none;
+            padding-left: 0;
 
-        li{
-            display: inline-block;
-            border: 1px solid @border;
-            border-right: none;
-            height: 28px;
-            width: 28px;
-            text-align: center;
-            line-height: 28px;
-            cursor: not-allowed;
-            background: #fff;
-            min-width: fit-content;
-            min-width: -moz-fit-content;
-            padding: 0 5px;
+            li{
+                display: inline-block;
+                border: 1px solid @border;
+                border-right: none;
+                height: 28px;
+                width: 28px;
+                text-align: center;
+                line-height: 28px;
+                cursor: not-allowed;
+                background: #fff;
+                min-width: fit-content;
+                min-width: -moz-fit-content;
+                padding: 0 5px;
 
 
-            &:first-of-type{
-                border-top-left-radius: 2px;
-                border-bottom-left-radius: 2px;
-            }
+                &:first-of-type{
+                    border-top-left-radius: 2px;
+                    border-bottom-left-radius: 2px;
+                }
 
-            &:last-of-type{
-                border-top-right-radius: 2px;
-                border-bottom-right-radius: 2px;
-                border-right: 1px solid grey;
-            }
+                &:last-of-type{
+                    border-top-right-radius: 2px;
+                    border-bottom-right-radius: 2px;
+                    border-right: 1px solid @border;
+                }
 
-            &.pagination-page,&.pagination-prev:not(.disabled),&.pagination-next:not(.disabled){
-                cursor: pointer;
-            }
+                &.pagination-page,&.pagination-prev:not(.disabled),&.pagination-next:not(.disabled),&.export{
+                    cursor: pointer;
+                }
 
-            &.active{
-                background: fade(grey,40%);
-            }
+                &.active{
+                    background: fade(grey,40%);
+                }
 
-            &.disabled{
-                color: grey;
+                &.disabled{
+                    color: grey;
+                }
             }
         }
     }
+
+    .ajax-table-pagination{
+        text-align: right;
+    }
 }
+

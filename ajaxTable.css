@@ -14,6 +14,7 @@
   cursor: pointer;
   background: #bbbbbb;
   font-weight: bold;
+  vertical-align: middle;
 }
 .ajax-table-processed thead tr th:after {
   position: absolute;
@@ -54,10 +55,20 @@
 .ajax-table-processed tbody tr td:first-of-type {
   border-left: none;
 }
-.ajax-table-pagination ul {
-  list-style-type: none;
+.ajax-table-utilities .ajax-table-pagination,
+.ajax-table-utilities .ajax-table-buttons {
+  display: inline-block;
+  width: 50%;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
 }
-.ajax-table-pagination ul li {
+.ajax-table-utilities .ajax-table-pagination ul,
+.ajax-table-utilities .ajax-table-buttons ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.ajax-table-utilities .ajax-table-pagination ul li,
+.ajax-table-utilities .ajax-table-buttons ul li {
   display: inline-block;
   border: 1px solid #dddddd;
   border-right: none;
@@ -71,23 +82,35 @@
   min-width: -moz-fit-content;
   padding: 0 5px;
 }
-.ajax-table-pagination ul li:first-of-type {
+.ajax-table-utilities .ajax-table-pagination ul li:first-of-type,
+.ajax-table-utilities .ajax-table-buttons ul li:first-of-type {
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
 }
-.ajax-table-pagination ul li:last-of-type {
+.ajax-table-utilities .ajax-table-pagination ul li:last-of-type,
+.ajax-table-utilities .ajax-table-buttons ul li:last-of-type {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  border-right: 1px solid grey;
+  border-right: 1px solid #dddddd;
 }
-.ajax-table-pagination ul li.pagination-page,
-.ajax-table-pagination ul li.pagination-prev:not(.disabled),
-.ajax-table-pagination ul li.pagination-next:not(.disabled) {
+.ajax-table-utilities .ajax-table-pagination ul li.pagination-page,
+.ajax-table-utilities .ajax-table-buttons ul li.pagination-page,
+.ajax-table-utilities .ajax-table-pagination ul li.pagination-prev:not(.disabled),
+.ajax-table-utilities .ajax-table-buttons ul li.pagination-prev:not(.disabled),
+.ajax-table-utilities .ajax-table-pagination ul li.pagination-next:not(.disabled),
+.ajax-table-utilities .ajax-table-buttons ul li.pagination-next:not(.disabled),
+.ajax-table-utilities .ajax-table-pagination ul li.export,
+.ajax-table-utilities .ajax-table-buttons ul li.export {
   cursor: pointer;
 }
-.ajax-table-pagination ul li.active {
+.ajax-table-utilities .ajax-table-pagination ul li.active,
+.ajax-table-utilities .ajax-table-buttons ul li.active {
   background: rgba(128, 128, 128, 0.4);
 }
-.ajax-table-pagination ul li.disabled {
+.ajax-table-utilities .ajax-table-pagination ul li.disabled,
+.ajax-table-utilities .ajax-table-buttons ul li.disabled {
   color: grey;
+}
+.ajax-table-utilities .ajax-table-pagination {
+  text-align: right;
 }

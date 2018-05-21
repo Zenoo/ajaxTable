@@ -127,7 +127,7 @@ const _ajaxTable = [];
             function updateTable(table, i) {
                 $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((_ajaxTable[i].page - 1) * 10, _ajaxTable[i].page * 10));
                 let pageCount = Math.floor((_ajaxTable[i].filteredTotal - 1) / 10) + 1;
-                updateNav($(table).nextAll('.ajax-table-pagination').eq(0), _ajaxTable[i].page, pageCount, i);
+                updateNav($(table).next().find('.ajax-table-pagination'), _ajaxTable[i].page, pageCount, i);
             }
 
             function paginationHandler(table, i, targetedPage, pagination, pageCount) {
@@ -319,7 +319,13 @@ const _ajaxTable = [];
                     let pageCount = Math.floor((_ajaxTable[i].total - 1) / 10) + 1;
                     updateNav(pagination, 1, pageCount, i);
 
-                    $(this).after(pagination);
+                    //PRINT BUTTONS
+                    let utilities = $('<div class="ajax-table-utilities"></div>');
+                    if(settings.printButtons){
+                        utilities.append('<aside class="ajax-table-buttons"><ul><li class="export">Excel</li><li class="export">CSV</li><li class="export">PDF</li></ul></aside>');
+                    }
+                    utilities.append(pagination);
+                    $(this).after(utilities);
 
                     //Pagination click handlers
                     pagination.on('click', 'li.pagination-page:not(.active)', function () {
@@ -335,6 +341,33 @@ const _ajaxTable = [];
 
                         paginationHandler(that, i, targetedPage, pagination, pageCount);
                     });
+
+                    //Print click handlers
+                    if(settings.printButtons){
+                        utilities.on('click','.ajax-table-buttons li',function(){
+                            switch ($(this).index()) {
+                                case 0:
+                                    $(that).excelExport();
+                                    break;
+                                case 1:
+                                    let tableToPrint = $(that).clone();
+                                    $('tfoot',tableToPrint).remove();
+                                    tableToPrint.csvExport();
+                                    break;
+                                case 2:
+                                    let iframe = $('<iframe class="excel-export" style="visibility: hidden; position: absolute; top:0; right:0;"></iframe>').appendTo('body');
+                                    tableToPDF = $(that).clone();
+                                    $('tfoot',tableToPDF).remove();
+                                    iframe.contents().find('body').append(tableToPDF);
+                                    
+                                    iframe[0].contentWindow.print();
+                                    iframe.remove();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
+                    }
 
                     //Sorting handler
                     $('thead th', this).on('click', function () {
