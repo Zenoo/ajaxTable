@@ -194,7 +194,7 @@ const _ajaxTable = [];
                 })
                     .done(json => {
                         _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
-                        if (settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items.');
+                        if (settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items. (page ' + page + ')');
                         if (page < (Math.floor((_ajaxTable[i].total - 1) / 10) + 1)) silentLoad(page + 1, i);
                         else {
                             _ajaxTable[i].dataFullyLoaded = true;

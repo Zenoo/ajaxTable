@@ -5,7 +5,9 @@
   "keywords": [
     "jquery-plugins",
     "ajax",
-    "table"
+    "table",
+    "jquery-plugin",
+    "ecosystem:jquery"
   ],
   "version": "1.3.0",
   "author": {
