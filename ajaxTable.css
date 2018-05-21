@@ -69,6 +69,7 @@
   background: #fff;
   min-width: fit-content;
   min-width: -moz-fit-content;
+  padding: 0 5px;
 }
 .ajax-table-pagination ul li:first-of-type {
   border-top-left-radius: 2px;

@@ -126,7 +126,7 @@ const _ajaxTable = [];
 
             function updateTable(table, i) {
                 $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((_ajaxTable[i].page - 1) * 10, _ajaxTable[i].page * 10));
-                let pageCount = Math.floor(_ajaxTable[i].filteredTotal / 10) + 1;
+                let pageCount = Math.floor((_ajaxTable[i].filteredTotal - 1) / 10) + 1;
                 updateNav($(table).nextAll('.ajax-table-pagination').eq(0), _ajaxTable[i].page, pageCount, i);
             }
 
@@ -143,7 +143,8 @@ const _ajaxTable = [];
                             order: _ajaxTable[i].orderSort,
                             search: _ajaxTable[i].search,
                             searchPatterns: _ajaxTable[i].searchPatterns,
-                            columns: _ajaxTable[i].columns
+                            columns: _ajaxTable[i].columns,
+                            total: true
                         })
                             .done(json => {
                                 $('tbody', table).empty();
@@ -157,7 +158,7 @@ const _ajaxTable = [];
                                     if(settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                 }
                                 LOADER.disable();
-                                resolve();
+                                resolve(json.total);
                             })
                             .fail((_, textStatus, error) => {
                                 let err = "Request Failed: " + textStatus + ", " + error;
@@ -169,16 +170,16 @@ const _ajaxTable = [];
                     //              AJAX      &&        NOT FULLY LOADED        &&               STORED
                     }else if (settings.source && !_ajaxTable[i].dataFullyLoaded && _ajaxTable[i].silentData[targetedPage]) {
                         $('tbody', table).empty().append(_ajaxTable[i].silentData[targetedPage]);
-                        resolve();
+                        resolve(_ajaxTable[i].total);
                     }else{
                         $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((targetedPage - 1) * 10, targetedPage * 10));
-                        resolve();
+                        resolve(_ajaxTable[i].filteredData.length);
                     }
                 });
 
-                dataGathering.then(() => {
+                dataGathering.then(items => {
                     _ajaxTable[i].page = targetedPage;
-                    updateNav(pagination, targetedPage, pageCount, i);
+                    updateNav(pagination, targetedPage, Math.floor((items - 1)  / 10) + 1, i);
                     settings.onUpdate.call(undefined, table, _ajaxTable[i]);
                 }).catch(err => {
                     alert(err);
@@ -194,7 +195,7 @@ const _ajaxTable = [];
                     .done(json => {
                         _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
                         if(settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items.');
-                        if(page < (Math.floor(_ajaxTable[i].total / 10) + 1)) silentLoad(page+1,i);
+                        if(page < (Math.floor((_ajaxTable[i].total - 1) / 10) + 1)) silentLoad(page+1,i);
                         else{
                             _ajaxTable[i].dataFullyLoaded = true;
                             _ajaxTable[i].data = [].concat(...Object.values(_ajaxTable[i].silentData));
@@ -308,7 +309,7 @@ const _ajaxTable = [];
 
                     //PAGINATION
                     let pagination = $('<aside class="ajax-table-pagination"><ul><li class="pagination-prev disabled">&laquo;</li><li class="pagination-next">&raquo;</li></ul></aside>');
-                    let pageCount = Math.floor(_ajaxTable[i].total / 10) + 1;
+                    let pageCount = Math.floor((_ajaxTable[i].total - 1) / 10) + 1;
                     updateNav(pagination, 1, pageCount, i);
 
                     $(this).after(pagination);
@@ -419,7 +420,7 @@ const _ajaxTable = [];
                                             for (tr of json.data) $('tbody', that).append(tr);
                                             if(settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                             _ajaxTable[i].page = 1;
-                                            updateNav(pagination, _ajaxTable[i].page, Math.floor(json.total / 10) + 1, i);
+                                            updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                             LOADER.disable();
                                             resolve();
                                         })
@@ -458,7 +459,7 @@ const _ajaxTable = [];
                     if(settings.logging) console.log('ajaxTable ready.');
                     settings.onReady.call(undefined, that, _ajaxTable[i]);
 
-                    if(Math.floor(_ajaxTable[i].total / 10) + 1 > 1) silentLoad(2,i);
+                    if(Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1) silentLoad(2,i);
                     else _ajaxTable[i].dataFullyLoaded = true;
                 }).catch(err => {
                     alert(err);
