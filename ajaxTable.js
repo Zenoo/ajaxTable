@@ -117,7 +117,7 @@ const _ajaxTable = [];
                 $('.pagination-page,.pagination-etc', pagination).remove();
                 if (targetedPage != 1) $('.pagination-prev', pagination).removeClass('disabled');
                 else $('.pagination-prev', pagination).addClass('disabled');
-                if (targetedPage != pageCount) $('.pagination-next', pagination).removeClass('disabled');
+                if (targetedPage < pageCount) $('.pagination-next', pagination).removeClass('disabled');
                 else $('.pagination-next', pagination).addClass('disabled');
 
                 for (li of paginationDisplay(_ajaxTable[i].page, pageCount)) {
