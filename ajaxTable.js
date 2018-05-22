@@ -442,6 +442,7 @@ const _ajaxTable = [];
                         if (e.keyCode == 13 || e.type == 'blur' && this.value != _ajaxTable[i].search[$(this).parent().index()]) {
                             _ajaxTable[i].search[$(this).parent().index()] = this.value;
                             _ajaxTable[i].activeSearch = !!_ajaxTable[i].search.filter(e => e.length).length;
+                            _ajaxTable[i].page = 1;
 
                             let searchPromise = new Promise((resolve, reject) => {
                                 if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
@@ -461,7 +462,6 @@ const _ajaxTable = [];
                                             $('tbody', that).empty();
                                             for (tr of json.data) $('tbody', that).append(tr);
                                             if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
-                                            _ajaxTable[i].page = 1;
                                             updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                             LOADER.disable();
                                             resolve();
@@ -475,7 +475,6 @@ const _ajaxTable = [];
                                         });
                                 } else {
                                     _ajaxTable[i].filteredData = _ajaxTable[i].data;
-                                    _ajaxTable[i].page = 1;
 
                                     $('tfoot input', that).filter((_, e) => e.value).each(function () {
                                         let index = $(this).parent().index();
