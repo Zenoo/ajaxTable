@@ -146,7 +146,7 @@ const _ajaxTable = [];
                             searchPatterns: _ajaxTable[i].searchPatterns,
                             columns: _ajaxTable[i].columns,
                             total: true,
-                            context: settings.sourceContext
+                            context: JSON.stringify(settings.sourceContext)
                         })
                             .done(json => {
                                 $('tbody', table).empty();
@@ -193,7 +193,7 @@ const _ajaxTable = [];
                 if (settings.logging) console.log('ajaxTable calling source...');
                 $.getJSON(settings.source, {
                     page: page,
-                    context: settings.sourceContext
+                    context: JSON.stringify(settings.sourceContext)
                 })
                     .done(json => {
                         _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
@@ -280,7 +280,7 @@ const _ajaxTable = [];
                         LOADER.enable();
                         $.getJSON(settings.source, {
                             total: true,
-                            context: settings.sourceContext
+                            context: JSON.stringify(settings.sourceContext)
                         })
                             .done(json => {
                                 $('tbody', this).empty();
@@ -399,7 +399,7 @@ const _ajaxTable = [];
                                     search: _ajaxTable[i].search,
                                     searchPatterns: _ajaxTable[i].searchPatterns,
                                     columns: _ajaxTable[i].columns,
-                                    context: settings.sourceContext
+                                    context: JSON.stringify(settings.sourceContext)
                                 })
                                     .done(json => {
                                         $('tbody', that).empty();
@@ -462,7 +462,7 @@ const _ajaxTable = [];
                                         searchPatterns: _ajaxTable[i].searchPatterns,
                                         columns: _ajaxTable[i].columns,
                                         total: true,
-                                        context: settings.sourceContext
+                                        context: JSON.stringify(settings.sourceContext)
                                     })
                                         .done(json => {
                                             $('tbody', that).empty();
@@ -539,7 +539,7 @@ const _ajaxTable = [];
                                     searchPatterns: _ajaxTable[i].searchPatterns,
                                     columns: _ajaxTable[i].columns,
                                     total: true,
-                                    context: settings.sourceContext
+                                    context: JSON.stringify(settings.sourceContext)
                                 })
                                     .done(json => {
                                         $('tbody', that).empty();
