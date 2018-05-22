@@ -515,6 +515,8 @@ const _ajaxTable = [];
                                 this.value = _ajaxTable[i].search[j];
                             });
 
+                            _ajaxTable[i].activeSearch = !!_ajaxTable[i].search.filter(e => e.length).length;
+
                             //Displays sorting
                             let orderedColumn = $('thead th', that).eq(_ajaxTable[i].orderBy);
                             orderedColumn.addClass('sorted');
