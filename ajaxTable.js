@@ -299,7 +299,7 @@ const _ajaxTable = [];
                                 $('tbody', this).empty();
                                 for (tr of json.data) $('tbody', this).append(tr);
                                 //Empty test
-                                if(!json.data.length) $('tbody', this).append('<td rowspan="'+bundle.columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td>');
+                                if(!json.data.length) $('tbody', this).append('<tr><td rowspan="'+bundle.columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                         
                                 bundle.data = json.data.map(e => htmlToElement(e));
                                 bundle.filteredData = [...bundle.data];
