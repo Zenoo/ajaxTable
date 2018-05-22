@@ -277,6 +277,8 @@ const _ajaxTable = [];
                         settings.beforeAjax.call(undefined, that, bundle);
                         if (settings.logging) console.log('ajaxTable calling source...');
 
+                        console.log(JSON.stringify(settings.sourceContext));
+
                         LOADER.enable();
                         $.getJSON(settings.source, {
                             total: true,
