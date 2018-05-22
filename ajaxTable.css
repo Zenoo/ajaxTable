@@ -55,6 +55,9 @@
 .ajax-table-processed tbody tr td:first-of-type {
   border-left: none;
 }
+.ajax-table-processed tbody tr td.empty {
+  text-align: center;
+}
 .ajax-table-utilities {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -177,6 +180,9 @@
   }
   .ajax-table-processed tbody tr td:first-of-type {
     border-left: none;
+  }
+  .ajax-table-processed tbody tr td.empty {
+    text-align: center;
   }
   .ajax-table-utilities {
     -webkit-user-select: none;
