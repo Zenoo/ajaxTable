@@ -130,7 +130,7 @@ const _ajaxTable = [];
             function updateTable(table, i) {
                 $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((_ajaxTable[i].page - 1) * 10, _ajaxTable[i].page * 10));
                 //Empty test
-                if(!_ajaxTable[i].filteredData.slice((_ajaxTable[i].page - 1) * 10, _ajaxTable[i].page * 10).length) $('tbody', table).append('<td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td>');
+                if(!_ajaxTable[i].filteredData.slice((_ajaxTable[i].page - 1) * 10, _ajaxTable[i].page * 10).length) $('tbody', table).append('<tr><td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                     
                 let pageCount = Math.floor((_ajaxTable[i].filteredTotal - 1) / 10) + 1;
                 updateNav($(table).next().find('.ajax-table-pagination'), _ajaxTable[i].page, pageCount, i);
@@ -157,7 +157,7 @@ const _ajaxTable = [];
                                 $('tbody', table).empty();
                                 for (tr of json.data) $('tbody', table).append(tr);
                                 //Empty test
-                                if(!json.data.length) $('tbody', table).append('<td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td>');
+                                if(!json.data.length) $('tbody', table).append('<tr><td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
 
                                 //          NO FILTER          &&                                          NO SORT
                                 if (!_ajaxTable[i].activeSearch && (_ajaxTable[i].orderBy == settings.orderBy && _ajaxTable[i].orderSort == settings.orderSort)) {
@@ -180,13 +180,13 @@ const _ajaxTable = [];
                     } else if (settings.source && !_ajaxTable[i].dataFullyLoaded && _ajaxTable[i].silentData[targetedPage]) {
                         $('tbody', table).empty().append(_ajaxTable[i].silentData[targetedPage]);
                         //Empty test
-                        if(!_ajaxTable[i].silentData[targetedPage].length) $('tbody', table).append('<td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td>');
+                        if(!_ajaxTable[i].silentData[targetedPage].length) $('tbody', table).append('<tr><td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                         
                         resolve(_ajaxTable[i].total);
                     } else {
                         $('tbody', table).empty().append(_ajaxTable[i].filteredData.slice((targetedPage - 1) * 10, targetedPage * 10));
                         //Empty test
-                        if(!_ajaxTable[i].filteredData.slice((targetedPage - 1) * 10, targetedPage * 10).length) $('tbody', table).append('<td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td>');
+                        if(!_ajaxTable[i].filteredData.slice((targetedPage - 1) * 10, targetedPage * 10).length) $('tbody', table).append('<tr><td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                         
                         resolve(_ajaxTable[i].filteredData.length);
                     }
@@ -421,7 +421,7 @@ const _ajaxTable = [];
                                         $('tbody', that).empty();
                                         for (tr of json.data) $('tbody', that).append(tr);
                                         //Empty test
-                                        if(!json.data.length) $('tbody', that).append('<td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td>');
+                                        if(!json.data.length) $('tbody', that).append('<tr><td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                         
                                         if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                         LOADER.disable();
@@ -487,7 +487,7 @@ const _ajaxTable = [];
                                             $('tbody', that).empty();
                                             for (tr of json.data) $('tbody', that).append(tr);
                                             //Empty test
-                                            if(!json.data.length) $('tbody', that).append('<td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td>');
+                                            if(!json.data.length) $('tbody', that).append('<tr><td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                         
                                             if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                             updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
@@ -567,7 +567,7 @@ const _ajaxTable = [];
                                         $('tbody', that).empty();
                                         for (tr of json.data) $('tbody', that).append(tr);
                                         //Empty test
-                                        if(!json.data.length) $('tbody', that).append('<td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td>');
+                                        if(!json.data.length) $('tbody', that).append('<tr><td rowspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                                 
                                         if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                         _ajaxTable[i].page = 1;
