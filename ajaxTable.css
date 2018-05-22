@@ -55,6 +55,12 @@
 .ajax-table-processed tbody tr td:first-of-type {
   border-left: none;
 }
+.ajax-table-utilities {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .ajax-table-utilities .ajax-table-pagination,
 .ajax-table-utilities .ajax-table-buttons {
   display: inline-block;
@@ -171,6 +177,12 @@
   }
   .ajax-table-processed tbody tr td:first-of-type {
     border-left: none;
+  }
+  .ajax-table-utilities {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   .ajax-table-utilities .ajax-table-pagination,
   .ajax-table-utilities .ajax-table-buttons {
