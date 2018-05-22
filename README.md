@@ -30,10 +30,11 @@ $('table').ajaxTable({
 ```
 {
   source: false,           // URL used to fetch the data. Set to false to disable AJAX loading
+  sourceContext: {},       // Optional object to pass to the server while fetching the data
   printButtons: true,      // Should the print buttons be displayed?
   orderBy: 0,              // Index of the column used to order the table
   orderSort: 'desc',       // Order direction
-  logging: false,           // Should ajaxTable use the developper console?
+  logging: false,          // Should ajaxTable use the developper console?
   onReady: function (table, data) { },     // Runs when the ajaxTable is ready
   beforeAjax: function (table, data) { },  // Runs before every AJAX call
   onUpdate: function (table, data) { }     // Runs after every table update
@@ -66,7 +67,11 @@ The data passed through the AJAX request looks like this
   order: "asc",               // Order sort. 'asc' or 'desc'
   search: ['','','test',''],  // The array containing the values of the search inputs
   columns: 4,                 // The number of columns in the table
-  total: true                 // OPTIONAL: if set to TRUE, you should send the property `total` back
+  total: true,                // OPTIONAL: if set to TRUE, you should send the property `total` back
+  context: {                  // The object from the `sourceContext` parameter
+    test: 'test1',
+    ...
+  }
 }
 ```
 
@@ -86,9 +91,10 @@ if(isset($_POST['total']) || isset($_POST['page'])){
     $search = isset($_POST['search']) ? $_POST['search'] : array_fill(0, (int)$_POST['columns'], "");
     $orderIndex = isset($_POST['orderBy']) ? $_POST['orderBy'] : 0;
     $order = isset($_POST['order']) ? $_POST['order'] : 'desc';
+    $context = $_POST['context']
 
-    $currentData = getItems($page, $search, $orderIndex, $order);  // Get your items here
-    $currentTotal = getTotalItems($search);                        // Get the total number of items here
+    $currentData = getItems($page, $search, $orderIndex, $order, $context);  // Get your items here
+    $currentTotal = getTotalItems($search, $context);                        // Get the total number of items here
 
     $return['data'] = $currentData;
 
