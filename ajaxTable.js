@@ -545,6 +545,7 @@ const _ajaxTable = [];
                             _ajaxTable[i].activeSearch = !!_ajaxTable[i].search.filter(e => e.length).length;
 
                             //Displays sorting
+                            $('thead th', that).removeClass('sorted inverted');
                             let orderedColumn = $('thead th', that).eq(_ajaxTable[i].orderBy);
                             orderedColumn.addClass('sorted');
                             if (_ajaxTable[i].orderSort == 'asc') orderedColumn.addClass('inverted');
