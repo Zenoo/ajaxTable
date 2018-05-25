@@ -444,7 +444,7 @@ const _ajaxTable = [];
                                     let $a_text = a.childNodes[index].innerText;
                                     let $b_text = b.childNodes[index].innerText;
 
-                                    return a.childNodes[index].hasAttribute('data-order') ? ($a_dataOrder > $b_dataOrder ? order : $a_dataOrder == $b_dataOrder ? 0 : -order) : ($a_text > $b_text ? order : $a_text == $b_text ? 0 : -order)
+                                    return a.childNodes[index].hasAttribute('data-order') ? $a_dataOrder.localeCompare($b_dataOrder) * order : $a_text.localeCompare($b_text) * order;
                                 });
 
                                 updateTable(that, i);
