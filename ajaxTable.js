@@ -329,6 +329,8 @@ const _ajaxTable = [];
                     //Store table bundle
                     _ajaxTable.push(bundle);
 
+                    i = _ajaxTable.length - 1;
+
                     //INITIAL SORTING DISPLAY
                     let orderedColumn = $('thead th', that).eq(_ajaxTable[i].orderBy);
                     orderedColumn.addClass('sorted');
