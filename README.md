@@ -1,5 +1,7 @@
 # ajaxTable
 
+![Dependencies](https://david-dm.org/Zenoo/ajaxTable.svg)
+
 Handle your table display asynchronously
 
 ### Doc
