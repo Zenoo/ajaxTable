@@ -541,7 +541,7 @@ const _ajaxTable = [];
 
                             //Displays searches
                             $('tfoot input', that).each(function(j){
-                                this.value = _ajaxTable[i].search[j];
+                                this.value = _ajaxTable[i].search[j] ? _ajaxTable[i].search[j] : '';
                             });
 
                             _ajaxTable[i].activeSearch = !!_ajaxTable[i].search.filter(e => e.length).length;
