@@ -143,7 +143,7 @@ const _ajaxTable = [];
                         settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
                         if (settings.logging) console.log('ajaxTable calling source...');
                         LOADER.enable();
-                        $.getJSON(settings.source, {
+                        $.post(settings.source, {
                             page: targetedPage,
                             orderBy: _ajaxTable[i].orderBy,
                             order: _ajaxTable[i].orderSort,
@@ -152,7 +152,7 @@ const _ajaxTable = [];
                             columns: _ajaxTable[i].columns,
                             total: true,
                             context: settings.sourceContext
-                        })
+                        }, () => {}, 'json')
                             .done(json => {
                                 $('tbody', table).empty();
                                 for (tr of json.data) $('tbody', table).append(tr);
@@ -204,10 +204,10 @@ const _ajaxTable = [];
             function silentLoad(page, i, table) {
                 settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
                 if (settings.logging) console.log('ajaxTable calling source...');
-                $.getJSON(settings.source, {
+                $.post(settings.source, {
                     page: page,
                     context: settings.sourceContext
-                })
+                }, () => {}, 'json')
                     .done(json => {
                         _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
                         if (settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items. (page ' + page + ')');
@@ -291,10 +291,10 @@ const _ajaxTable = [];
                         if (settings.logging) console.log('ajaxTable calling source...');
 
                         LOADER.enable();
-                        $.getJSON(settings.source, {
+                        $.post(settings.source, {
                             total: true,
                             context: settings.sourceContext
-                        })
+                        }, () => {}, 'json')
                             .done(json => {
                                 $('tbody', this).empty();
                                 for (tr of json.data) $('tbody', this).append(tr);
@@ -410,7 +410,7 @@ const _ajaxTable = [];
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
                                 LOADER.enable();
-                                $.getJSON(settings.source, {
+                                $.post(settings.source, {
                                     page: _ajaxTable[i].page,
                                     orderBy: _ajaxTable[i].orderBy,
                                     order: _ajaxTable[i].orderSort,
@@ -418,7 +418,7 @@ const _ajaxTable = [];
                                     searchPatterns: _ajaxTable[i].searchPatterns,
                                     columns: _ajaxTable[i].columns,
                                     context: settings.sourceContext
-                                })
+                                }, () => {}, 'json')
                                     .done(json => {
                                         $('tbody', that).empty();
                                         for (tr of json.data) $('tbody', that).append(tr);
@@ -475,7 +475,7 @@ const _ajaxTable = [];
                                     settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                     if (settings.logging) console.log('ajaxTable calling source...');
                                     LOADER.enable();
-                                    $.getJSON(settings.source, {
+                                    $.post(settings.source, {
                                         page: _ajaxTable[i].page,
                                         orderBy: _ajaxTable[i].orderBy,
                                         order: _ajaxTable[i].orderSort,
@@ -484,7 +484,7 @@ const _ajaxTable = [];
                                         columns: _ajaxTable[i].columns,
                                         total: true,
                                         context: settings.sourceContext
-                                    })
+                                    }, () => {}, 'json')
                                         .done(json => {
                                             $('tbody', that).empty();
                                             for (tr of json.data) $('tbody', that).append(tr);
@@ -556,7 +556,7 @@ const _ajaxTable = [];
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
                                 LOADER.enable();
-                                $.getJSON(settings.source, {
+                                $.post(settings.source, {
                                     page: _ajaxTable[i].page,
                                     orderBy: _ajaxTable[i].orderBy,
                                     order: _ajaxTable[i].orderSort,
@@ -565,7 +565,7 @@ const _ajaxTable = [];
                                     columns: _ajaxTable[i].columns,
                                     total: true,
                                     context: settings.sourceContext
-                                })
+                                }, () => {}, 'json')
                                     .done(json => {
                                         $('tbody', that).empty();
                                         for (tr of json.data) $('tbody', that).append(tr);
