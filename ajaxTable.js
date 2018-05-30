@@ -508,7 +508,7 @@ const _ajaxTable = [];
 
                                     $('tfoot input', that).filter((_, e) => e.value).each(function () {
                                         let index = $(this).parent().index();
-                                        _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
+                                        _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value.toLowerCase()) : tr.childNodes[index].innerText.toLowerCase().includes(this.value.toLowerCase()));
                                     });
 
                                     _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
