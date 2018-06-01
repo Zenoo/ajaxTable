@@ -44,10 +44,6 @@
   box-sizing: border-box;
   font-weight: bold;
 }
-.ajax-table-processed tfoot tr td input::-webkit-input-placeholder,
-.ajax-table-processed tfoot tr td input:-moz-placeholder,
-.ajax-table-processed tfoot tr td input::-moz-placeholder,
-.ajax-table-processed tfoot tr td input:-ms-input-placeholder,
 .ajax-table-processed tfoot tr td input::placeholder {
   color: red;
   font-size: 11px;
@@ -178,10 +174,6 @@
     box-sizing: border-box;
     font-weight: bold;
   }
-  .ajax-table-processed tfoot tr td input::-webkit-input-placeholder,
-  .ajax-table-processed tfoot tr td input:-moz-placeholder,
-  .ajax-table-processed tfoot tr td input::-moz-placeholder,
-  .ajax-table-processed tfoot tr td input:-ms-input-placeholder,
   .ajax-table-processed tfoot tr td input::placeholder {
     color: red;
     font-size: 11px;
