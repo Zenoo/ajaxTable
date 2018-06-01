@@ -1,4 +1,4 @@
-# ajaxTable
+# ajaxTable [(Demo)](https://jsfiddle.net/Zenoo0/g4goby5m/)
 
 ![Dependencies](https://david-dm.org/Zenoo/ajaxTable.svg)
 
