@@ -596,7 +596,7 @@ const _ajaxTable = [];
                                 _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
 
                                 updateTable(that, i);
-                                settings.onUpdate.call(undefined, table, _ajaxTable[i]);
+                                settings.onUpdate.call(undefined, that, _ajaxTable[i]);
                             }
                         }else{
                             localStorage.removeItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_search');
