@@ -526,6 +526,10 @@ const _ajaxTable = [];
                             });
                         }
                     });
+                    
+                    //TABLE READY
+                    if (settings.logging) console.log('ajaxTable ready.');
+                    settings.onReady.call(undefined, that, _ajaxTable[i]);
 
                     //Reuse user's last sort + filter
                     let storageExpiresAt = localStorage.getItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_expires');
@@ -572,6 +576,7 @@ const _ajaxTable = [];
                                         _ajaxTable[i].page = 1;
                                         updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                         LOADER.disable();
+                                        settings.onUpdate.call(undefined, table, _ajaxTable[i]);
                                     })
                                     .fail((_, textStatus, error) => {
                                         let err = "Request Failed: " + textStatus + ", " + error;
@@ -591,6 +596,7 @@ const _ajaxTable = [];
                                 _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
 
                                 updateTable(that, i);
+                                settings.onUpdate.call(undefined, table, _ajaxTable[i]);
                             }
                         }else{
                             localStorage.removeItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_search');
@@ -600,10 +606,6 @@ const _ajaxTable = [];
                             storageExpiresAt = null;
                         }
                     }
-
-                    //TABLE READY
-                    if (settings.logging) console.log('ajaxTable ready.');
-                    settings.onReady.call(undefined, that, _ajaxTable[i]);
 
                     if (Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1) silentLoad(2, i);
                     else _ajaxTable[i].dataFullyLoaded = true;
