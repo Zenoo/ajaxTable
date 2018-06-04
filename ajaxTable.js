@@ -576,7 +576,7 @@ const _ajaxTable = [];
                                         _ajaxTable[i].page = 1;
                                         updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                         LOADER.disable();
-                                        settings.onUpdate.call(undefined, table, _ajaxTable[i]);
+                                        settings.onUpdate.call(undefined, that, _ajaxTable[i]);
                                     })
                                     .fail((_, textStatus, error) => {
                                         let err = "Request Failed: " + textStatus + ", " + error;
