@@ -527,10 +527,6 @@ const _ajaxTable = [];
                         }
                     });
 
-                    //TABLE READY
-                    if (settings.logging) console.log('ajaxTable ready.');
-                    settings.onReady.call(undefined, that, _ajaxTable[i]);
-
                     //Reuse user's last sort + filter
                     let storageExpiresAt = localStorage.getItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_expires');
                     if(storageExpiresAt){
@@ -604,6 +600,10 @@ const _ajaxTable = [];
                             storageExpiresAt = null;
                         }
                     }
+
+                    //TABLE READY
+                    if (settings.logging) console.log('ajaxTable ready.');
+                    settings.onReady.call(undefined, that, _ajaxTable[i]);
 
                     if (Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1) silentLoad(2, i);
                     else _ajaxTable[i].dataFullyLoaded = true;
