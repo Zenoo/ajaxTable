@@ -607,7 +607,7 @@ const _ajaxTable = [];
                         }
                     }
 
-                    if (Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1) silentLoad(2, i);
+                    if (Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1 && settings.source) silentLoad(2, i);
                     else _ajaxTable[i].dataFullyLoaded = true;
                 }).catch(err => {
                     alert(err);
