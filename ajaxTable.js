@@ -530,6 +530,7 @@ const _ajaxTable = [];
                     //TABLE READY
                     if (settings.logging) console.log('ajaxTable ready.');
                     settings.onReady.call(undefined, that, _ajaxTable[i]);
+                    settings.onUpdate.call(undefined, that, _ajaxTable[i]);
 
                     //Reuse user's last sort + filter
                     let storageExpiresAt = localStorage.getItem(window.location.hostname + window.location.pathname + '_ajaxTable_' + i + '_expires');
