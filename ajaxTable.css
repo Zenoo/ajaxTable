@@ -77,6 +77,8 @@
 .ajax-table-utilities .ajax-table-pagination,
 .ajax-table-utilities .ajax-table-buttons {
   display: inline-block;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
 }
 .ajax-table-utilities .ajax-table-pagination ul,
 .ajax-table-utilities .ajax-table-buttons ul {
@@ -213,6 +215,8 @@
   .ajax-table-utilities .ajax-table-pagination,
   .ajax-table-utilities .ajax-table-buttons {
     display: inline-block;
+    min-width: -moz-fit-content;
+    min-width: fit-content;
   }
   .ajax-table-utilities .ajax-table-pagination ul,
   .ajax-table-utilities .ajax-table-buttons ul {
