@@ -123,12 +123,17 @@ const _ajaxTable = [];
                 if (targetedPage < pageCount) $('.pagination-next', utilities).removeClass('disabled');
                 else $('.pagination-next', utilities).addClass('disabled');
 
+                console.log(paginationDisplay(_ajaxTable[i].page, pageCount));
                 for (li of paginationDisplay(_ajaxTable[i].page, pageCount)) {
                     $('.pagination-next', utilities).before('<li class="' + (li == '...' ? 'pagination-etc' : 'pagination-page') + (li == targetedPage ? ' active' : '') + '" data-page="' + li + '">' + li + '</li>');
                 }
 
                 _ajaxTable[i].page = targetedPage;
 
+                console.log($('#ajax-table-item-start-id', utilities));
+                console.log($('#ajax-table-item-end-id', utilities));
+                console.log($('#ajax-table-item-filtered-total', utilities));
+                console.log($('#ajax-table-item-total', utilities));
                 //COUNT
                 $('#ajax-table-item-start-id', utilities).text((_ajaxTable[i].page-1)*10+1);
                 $('#ajax-table-item-end-id', utilities).text(_ajaxTable[i].page*10);
