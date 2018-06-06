@@ -114,15 +114,17 @@ const _ajaxTable = [];
             }
 
             function updateNav(utilities, targetedPage, pageCount, i) {
+                console.log(utilities);
+                console.log(_ajaxTable[i]);
                 //PAGINATION
-                $('.ajax-table-pagination .pagination-page,.pagination-etc', utilities).remove();
-                if (targetedPage != 1) $('.ajax-table-pagination .pagination-prev', utilities).removeClass('disabled');
-                else $('.ajax-table-pagination .pagination-prev', utilities).addClass('disabled');
-                if (targetedPage < pageCount) $('.ajax-table-pagination .pagination-next', utilities).removeClass('disabled');
-                else $('.ajax-table-pagination .pagination-next', utilities).addClass('disabled');
+                $('.pagination-page,.pagination-etc', utilities).remove();
+                if (targetedPage != 1) $('.pagination-prev', utilities).removeClass('disabled');
+                else $('.pagination-prev', utilities).addClass('disabled');
+                if (targetedPage < pageCount) $('.pagination-next', utilities).removeClass('disabled');
+                else $('.pagination-next', utilities).addClass('disabled');
 
                 for (li of paginationDisplay(_ajaxTable[i].page, pageCount)) {
-                    $('.ajax-table-pagination .pagination-next', utilities).before('<li class="' + (li == '...' ? 'pagination-etc' : 'pagination-page') + (li == targetedPage ? ' active' : '') + '" data-page="' + li + '">' + li + '</li>');
+                    $('.pagination-next', utilities).before('<li class="' + (li == '...' ? 'pagination-etc' : 'pagination-page') + (li == targetedPage ? ' active' : '') + '" data-page="' + li + '">' + li + '</li>');
                 }
 
                 _ajaxTable[i].page = targetedPage;
