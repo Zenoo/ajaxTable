@@ -128,8 +128,8 @@ const _ajaxTable = [];
                 _ajaxTable[i].page = targetedPage;
 
                 //COUNT
-                $('#ajax-table-item-start-id', utilities).text((_ajaxTable[i].page-1)*10+1);
-                $('#ajax-table-item-end-id', utilities).text(_ajaxTable[i].page*10);
+                $('#ajax-table-item-start-id', utilities).text((_ajaxTable[i].page-1)*10+1 > _ajaxTable[i].filteredTotal ? _ajaxTable[i].filteredTotal : (_ajaxTable[i].page-1)*10+1);
+                $('#ajax-table-item-end-id', utilities).text(_ajaxTable[i].page*10 > _ajaxTable[i].filteredTotal ? _ajaxTable[i].filteredTotal : _ajaxTable[i].page*10);
                 $('#ajax-table-item-filtered-total', utilities).text(_ajaxTable[i].filteredTotal);
                 $('#ajax-table-item-total', utilities).text(_ajaxTable[i].total);
             }
