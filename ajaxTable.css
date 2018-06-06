@@ -84,6 +84,7 @@
 .ajax-table-utilities .ajax-table-buttons ul {
   list-style-type: none;
   padding-left: 0;
+  margin-bottom: 0;
 }
 .ajax-table-utilities .ajax-table-pagination ul li,
 .ajax-table-utilities .ajax-table-buttons ul li {
@@ -137,6 +138,11 @@
 }
 .ajax-table-utilities .ajax-table-count {
   display: inline-block;
+}
+.ajax-table-utilities .ajax-table-count > div {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 @media print {
   .ajax-table-processed {
@@ -225,6 +231,7 @@
   .ajax-table-utilities .ajax-table-buttons ul {
     list-style-type: none;
     padding-left: 0;
+    margin-bottom: 0;
   }
   .ajax-table-utilities .ajax-table-pagination ul li,
   .ajax-table-utilities .ajax-table-buttons ul li {
@@ -278,5 +285,10 @@
   }
   .ajax-table-utilities .ajax-table-count {
     display: inline-block;
+  }
+  .ajax-table-utilities .ajax-table-count > div {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }

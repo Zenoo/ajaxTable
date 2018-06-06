@@ -116,6 +116,7 @@
             ul{
                 list-style-type: none;
                 padding-left: 0;
+                margin-bottom: 0;
     
                 li{
                     display: inline-block;
@@ -168,6 +169,12 @@
 
         .ajax-table-count{
             display: inline-block;
+
+            &>div{
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+            }
         }
     }
 };
