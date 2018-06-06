@@ -114,8 +114,6 @@ const _ajaxTable = [];
             }
 
             function updateNav(utilities, targetedPage, pageCount, i) {
-                console.log(utilities);
-                console.log(_ajaxTable[i]);
                 //PAGINATION
                 $('.pagination-page,.pagination-etc', utilities).remove();
                 if (targetedPage != 1) $('.pagination-prev', utilities).removeClass('disabled');
@@ -123,17 +121,12 @@ const _ajaxTable = [];
                 if (targetedPage < pageCount) $('.pagination-next', utilities).removeClass('disabled');
                 else $('.pagination-next', utilities).addClass('disabled');
 
-                console.log(paginationDisplay(_ajaxTable[i].page, pageCount));
                 for (li of paginationDisplay(_ajaxTable[i].page, pageCount)) {
                     $('.pagination-next', utilities).before('<li class="' + (li == '...' ? 'pagination-etc' : 'pagination-page') + (li == targetedPage ? ' active' : '') + '" data-page="' + li + '">' + li + '</li>');
                 }
 
                 _ajaxTable[i].page = targetedPage;
 
-                console.log($('#ajax-table-item-start-id', utilities));
-                console.log($('#ajax-table-item-end-id', utilities));
-                console.log($('#ajax-table-item-filtered-total', utilities));
-                console.log($('#ajax-table-item-total', utilities));
                 //COUNT
                 $('#ajax-table-item-start-id', utilities).text((_ajaxTable[i].page-1)*10+1);
                 $('#ajax-table-item-end-id', utilities).text(_ajaxTable[i].page*10);
@@ -360,12 +353,12 @@ const _ajaxTable = [];
                     //PRINT BUTTONS
                     let utilities = $('<div class="ajax-table-utilities"></div>');
 
-                    updateNav(utilities, 1, pageCount, i);
-
                     if(settings.printButtons) utilities.append('<aside class="ajax-table-buttons"><ul><li class="export">Excel</li><li class="export">CSV</li><li class="export">PDF</li></ul></aside>');      
                     utilities.append(count);
                     utilities.append(pagination);
                     $(this).after(utilities);
+
+                    updateNav(utilities, 1, pageCount, i);
 
                     
                     //Pagination click handlers
