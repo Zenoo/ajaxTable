@@ -132,6 +132,9 @@
 .ajax-table-utilities .ajax-table-pagination {
   text-align: right;
 }
+.ajax-table-utilities .ajax-table-buttons {
+  width: 130px;
+}
 .ajax-table-utilities .ajax-table-count {
   display: inline-block;
 }
@@ -269,6 +272,9 @@
   }
   .ajax-table-utilities .ajax-table-pagination {
     text-align: right;
+  }
+  .ajax-table-utilities .ajax-table-buttons {
+    width: 130px;
   }
   .ajax-table-utilities .ajax-table-count {
     display: inline-block;
