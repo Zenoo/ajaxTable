@@ -439,6 +439,8 @@ const _ajaxTable = [];
                                         if(!json.data.length) $('tbody', that).append('<tr><td class="empty" colspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                         
                                         if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
+
+                                        updateNav(utilities, 1, pageCount, i);
                                         LOADER.disable();
                                         resolve();
                                     })
