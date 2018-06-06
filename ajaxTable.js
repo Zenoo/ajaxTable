@@ -341,14 +341,20 @@ const _ajaxTable = [];
                     let pageCount = Math.floor((_ajaxTable[i].total - 1) / 10) + 1;
                     updateNav(pagination, 1, pageCount, i);
 
+                    //COUNT DISPLAY
+                    let count = $('<aside class="ajax-table-count">['+((_ajaxTable[i].page-1)*10+1)+' - '+(_ajaxTable[i].page*10)+'] / '+_ajaxTable[i].filteredTotal+' ('+_ajaxTable[i].total+')</aside>');
+
                     //PRINT BUTTONS
                     let utilities = $('<div class="ajax-table-utilities"></div>');
                     if(settings.printButtons){
                         utilities.append('<aside class="ajax-table-buttons"><ul><li class="export">Excel</li><li class="export">CSV</li><li class="export">PDF</li></ul></aside>');
                     }
+                    
+                    utilities.append(count);
                     utilities.append(pagination);
                     $(this).after(utilities);
 
+                    
                     //Pagination click handlers
                     pagination.on('click', 'li.pagination-page:not(.active)', function () {
                         let targetedPage = +$(this).attr('data-page');

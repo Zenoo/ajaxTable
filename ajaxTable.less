@@ -100,13 +100,17 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        -webkit-display: flex;
+        -moz-display: flex;
+        -ms-display: flex;
+        -o-display: flex;
+        display: flex;
+        justify-content: space-between;
         
         //PAGINATION
         .ajax-table-pagination,.ajax-table-buttons{
             display: inline-block;
-            width: 50%;
-            min-width: -moz-fit-content;
-            min-width: fit-content;
+
             ul{
                 list-style-type: none;
                 padding-left: 0;
@@ -154,6 +158,10 @@
     
         .ajax-table-pagination{
             text-align: right;
+        }
+
+        .ajax-table-count{
+            display: inline-block;
         }
     }
 };

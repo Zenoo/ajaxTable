@@ -67,13 +67,16 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  -webkit-display: flex;
+  -moz-display: flex;
+  -ms-display: flex;
+  -o-display: flex;
+  display: flex;
+  justify-content: space-between;
 }
 .ajax-table-utilities .ajax-table-pagination,
 .ajax-table-utilities .ajax-table-buttons {
   display: inline-block;
-  width: 50%;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
 }
 .ajax-table-utilities .ajax-table-pagination ul,
 .ajax-table-utilities .ajax-table-buttons ul {
@@ -126,6 +129,9 @@
 }
 .ajax-table-utilities .ajax-table-pagination {
   text-align: right;
+}
+.ajax-table-utilities .ajax-table-count {
+  display: inline-block;
 }
 @media print {
   .ajax-table-processed {
@@ -197,13 +203,16 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+    display: flex;
+    justify-content: space-between;
   }
   .ajax-table-utilities .ajax-table-pagination,
   .ajax-table-utilities .ajax-table-buttons {
     display: inline-block;
-    width: 50%;
-    min-width: -moz-fit-content;
-    min-width: fit-content;
   }
   .ajax-table-utilities .ajax-table-pagination ul,
   .ajax-table-utilities .ajax-table-buttons ul {
@@ -256,5 +265,8 @@
   }
   .ajax-table-utilities .ajax-table-pagination {
     text-align: right;
+  }
+  .ajax-table-utilities .ajax-table-count {
+    display: inline-block;
   }
 }
