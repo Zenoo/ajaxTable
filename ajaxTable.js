@@ -348,7 +348,7 @@ const _ajaxTable = [];
                     let pageCount = Math.floor((_ajaxTable[i].total - 1) / 10) + 1;
 
                     //COUNT DISPLAY
-                    let count = $('<aside class="ajax-table-count">'+(lang.toLowerCase().includes('fr') ? "Elements" : "Items")+' <span id="ajax-table-item-start-id">'+((_ajaxTable[i].page-1)*10+1)+'</span> '+(lang.toLowerCase().includes('fr') ? "à" : "to")+' <span id="ajax-table-item-end-id">'+(_ajaxTable[i].page*10)+'</span> '+(lang.toLowerCase().includes('fr') ? "sur" : "of")+' <span id="ajax-table-item-filtered-total">'+_ajaxTable[i].filteredTotal+'</span> (<span id="ajax-table-item-total">'+_ajaxTable[i].total+'</span> '+(lang.toLowerCase().includes('fr') ? "au total" : "total")+')</aside>');
+                    let count = $('<aside class="ajax-table-count">'+(lang.toLowerCase().includes('fr') ? "Elements" : "Items")+' <span id="ajax-table-item-start-id"></span> '+(lang.toLowerCase().includes('fr') ? "à" : "to")+' <span id="ajax-table-item-end-id"></span> '+(lang.toLowerCase().includes('fr') ? "sur" : "of")+' <span id="ajax-table-item-filtered-total"></span> (<span id="ajax-table-item-total"></span> '+(lang.toLowerCase().includes('fr') ? "au total" : "total")+')</aside>');
 
                     //PRINT BUTTONS
                     let utilities = $('<div class="ajax-table-utilities"></div>');
