@@ -113,18 +113,25 @@ const _ajaxTable = [];
                 return result;
             }
 
-            function updateNav(pagination, targetedPage, pageCount, i) {
-                $('.pagination-page,.pagination-etc', pagination).remove();
-                if (targetedPage != 1) $('.pagination-prev', pagination).removeClass('disabled');
-                else $('.pagination-prev', pagination).addClass('disabled');
-                if (targetedPage < pageCount) $('.pagination-next', pagination).removeClass('disabled');
-                else $('.pagination-next', pagination).addClass('disabled');
+            function updateNav(utilities, targetedPage, pageCount, i) {
+                //PAGINATION
+                $('.ajax-table-pagination .pagination-page,.pagination-etc', utilities).remove();
+                if (targetedPage != 1) $('.ajax-table-pagination .pagination-prev', utilities).removeClass('disabled');
+                else $('.ajax-table-pagination .pagination-prev', utilities).addClass('disabled');
+                if (targetedPage < pageCount) $('.ajax-table-pagination .pagination-next', utilities).removeClass('disabled');
+                else $('.ajax-table-pagination .pagination-next', utilities).addClass('disabled');
 
                 for (li of paginationDisplay(_ajaxTable[i].page, pageCount)) {
-                    $('.pagination-next', pagination).before('<li class="' + (li == '...' ? 'pagination-etc' : 'pagination-page') + (li == targetedPage ? ' active' : '') + '" data-page="' + li + '">' + li + '</li>');
+                    $('.ajax-table-pagination .pagination-next', utilities).before('<li class="' + (li == '...' ? 'pagination-etc' : 'pagination-page') + (li == targetedPage ? ' active' : '') + '" data-page="' + li + '">' + li + '</li>');
                 }
 
                 _ajaxTable[i].page = targetedPage;
+
+                //COUNT
+                $('#ajax-table-item-start-id', utilities).text((_ajaxTable[i].page-1)*10+1);
+                $('#ajax-table-item-end-id', utilities).text(_ajaxTable[i].page*10);
+                $('#ajax-table-item-filtered-total', utilities).text(_ajaxTable[i].filteredTotal);
+                $('#ajax-table-item-total', utilities).text(_ajaxTable[i].total);
             }
 
             function updateTable(table, i) {
@@ -133,7 +140,7 @@ const _ajaxTable = [];
                 if(!_ajaxTable[i].filteredData.slice((_ajaxTable[i].page - 1) * 10, _ajaxTable[i].page * 10).length) $('tbody', table).append('<tr><td class="empty" colspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                     
                 let pageCount = Math.floor((_ajaxTable[i].filteredTotal - 1) / 10) + 1;
-                updateNav($(table).next().find('.ajax-table-pagination'), _ajaxTable[i].page, pageCount, i);
+                updateNav($(table).next(), _ajaxTable[i].page, pageCount, i);
             }
 
             function paginationHandler(table, i, targetedPage, pagination, pageCount) {
@@ -194,7 +201,7 @@ const _ajaxTable = [];
 
                 dataGathering.then(items => {
                     _ajaxTable[i].page = targetedPage;
-                    updateNav(pagination, targetedPage, Math.floor((items - 1) / 10) + 1, i);
+                    updateNav(pagination.parent(), targetedPage, Math.floor((items - 1) / 10) + 1, i);
                     settings.onUpdate.call(undefined, table, _ajaxTable[i]);
                 }).catch(err => {
                     alert(err);
@@ -339,17 +346,16 @@ const _ajaxTable = [];
                     //PAGINATION
                     let pagination = $('<aside class="ajax-table-pagination"><ul><li class="pagination-prev disabled">&laquo;</li><li class="pagination-next">&raquo;</li></ul></aside>');
                     let pageCount = Math.floor((_ajaxTable[i].total - 1) / 10) + 1;
-                    updateNav(pagination, 1, pageCount, i);
 
                     //COUNT DISPLAY
-                    let count = $('<aside class="ajax-table-count">'+(lang.toLowerCase().includes('fr') ? "Elements" : "Items")+' '+((_ajaxTable[i].page-1)*10+1)+' '+(lang.toLowerCase().includes('fr') ? "à" : "to")+' '+(_ajaxTable[i].page*10)+' '+(lang.toLowerCase().includes('fr') ? "sur" : "of")+' '+_ajaxTable[i].filteredTotal+' ('+_ajaxTable[i].total+' '+(lang.toLowerCase().includes('fr') ? "au total" : "total")+')</aside>');
+                    let count = $('<aside class="ajax-table-count">'+(lang.toLowerCase().includes('fr') ? "Elements" : "Items")+' <span id="ajax-table-item-start-id">'+((_ajaxTable[i].page-1)*10+1)+'</span> '+(lang.toLowerCase().includes('fr') ? "à" : "to")+' <span id="ajax-table-item-end-id">'+(_ajaxTable[i].page*10)+'</span> '+(lang.toLowerCase().includes('fr') ? "sur" : "of")+' <span id="ajax-table-item-filtered-total">'+_ajaxTable[i].filteredTotal+'</span> (<span id="ajax-table-item-total">'+_ajaxTable[i].total+'</span> '+(lang.toLowerCase().includes('fr') ? "au total" : "total")+')</aside>');
 
                     //PRINT BUTTONS
                     let utilities = $('<div class="ajax-table-utilities"></div>');
-                    if(settings.printButtons){
-                        utilities.append('<aside class="ajax-table-buttons"><ul><li class="export">Excel</li><li class="export">CSV</li><li class="export">PDF</li></ul></aside>');
-                    }
-                    
+
+                    updateNav(utilities, 1, pageCount, i);
+
+                    if(settings.printButtons) utilities.append('<aside class="ajax-table-buttons"><ul><li class="export">Excel</li><li class="export">CSV</li><li class="export">PDF</li></ul></aside>');      
                     utilities.append(count);
                     utilities.append(pagination);
                     $(this).after(utilities);
@@ -498,7 +504,7 @@ const _ajaxTable = [];
                                             if(!json.data.length) $('tbody', that).append('<tr><td class="empty" colspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                         
                                             if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
-                                            updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
+                                            updateNav(utilities, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                             LOADER.disable();
                                             resolve();
                                         })
@@ -581,7 +587,7 @@ const _ajaxTable = [];
                                 
                                         if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                         _ajaxTable[i].page = 1;
-                                        updateNav(pagination, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
+                                        updateNav(utilities, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                         LOADER.disable();
                                         settings.onUpdate.call(undefined, that, _ajaxTable[i]);
                                     })
