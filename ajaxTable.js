@@ -342,7 +342,7 @@ const _ajaxTable = [];
                     updateNav(pagination, 1, pageCount, i);
 
                     //COUNT DISPLAY
-                    let count = $('<aside class="ajax-table-count">['+((_ajaxTable[i].page-1)*10+1)+' - '+(_ajaxTable[i].page*10)+'] / '+_ajaxTable[i].filteredTotal+' ('+_ajaxTable[i].total+')</aside>');
+                    let count = $('<aside class="ajax-table-count">'+(lang.toLowerCase().includes('fr') ? "Elements" : "Items")+' '+((_ajaxTable[i].page-1)*10+1)+' '+(lang.toLowerCase().includes('fr') ? "à" : "to")+' '+(_ajaxTable[i].page*10)+'] '+(lang.toLowerCase().includes('fr') ? "sur" : "of")+' '+_ajaxTable[i].filteredTotal+' ('+_ajaxTable[i].total+' '+(lang.toLowerCase().includes('fr') ? "au total" : "total")+').</aside>');
 
                     //PRINT BUTTONS
                     let utilities = $('<div class="ajax-table-utilities"></div>');
