@@ -229,6 +229,7 @@ const _ajaxTable = [];
                                 _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
                             });
 
+                            _ajaxTable[i].total = _ajaxTable[i].data.length;
                             _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
 
                             if (settings.logging) console.log('ajaxTable is done with AJAX tasks.');
