@@ -85,6 +85,11 @@
   list-style-type: none;
   padding-left: 0;
   margin-bottom: 0;
+  -webkit-display: inline-flex;
+  -moz-display: inline-flex;
+  -ms-display: inline-flex;
+  -o-display: inline-flex;
+  display: inline-flex;
 }
 .ajax-table-utilities .ajax-table-pagination ul li,
 .ajax-table-utilities .ajax-table-buttons ul li {
@@ -232,6 +237,11 @@
     list-style-type: none;
     padding-left: 0;
     margin-bottom: 0;
+    -webkit-display: inline-flex;
+    -moz-display: inline-flex;
+    -ms-display: inline-flex;
+    -o-display: inline-flex;
+    display: inline-flex;
   }
   .ajax-table-utilities .ajax-table-pagination ul li,
   .ajax-table-utilities .ajax-table-buttons ul li {
