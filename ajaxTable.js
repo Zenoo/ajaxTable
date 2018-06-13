@@ -528,8 +528,8 @@ const _ajaxTable = [];
 
                                     _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
 
-
                                     updateTable(that, i);
+                                    resolve();
                                 }
                             });
 
