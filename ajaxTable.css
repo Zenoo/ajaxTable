@@ -73,12 +73,14 @@
   -o-display: flex;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .ajax-table-utilities .ajax-table-pagination,
 .ajax-table-utilities .ajax-table-buttons {
   display: inline-block;
   min-width: -moz-fit-content;
   min-width: fit-content;
+  margin: 5px;
 }
 .ajax-table-utilities .ajax-table-pagination ul,
 .ajax-table-utilities .ajax-table-buttons ul {
@@ -225,12 +227,14 @@
     -o-display: flex;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .ajax-table-utilities .ajax-table-pagination,
   .ajax-table-utilities .ajax-table-buttons {
     display: inline-block;
     min-width: -moz-fit-content;
     min-width: fit-content;
+    margin: 5px;
   }
   .ajax-table-utilities .ajax-table-pagination ul,
   .ajax-table-utilities .ajax-table-buttons ul {
