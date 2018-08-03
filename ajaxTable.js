@@ -583,6 +583,7 @@ const _ajaxTable = [];
                                     context: settings.sourceContext
                                 }, () => {}, 'json')
                                     .done(json => {
+                                        console.log(json);
                                         $('tbody', that).empty();
                                         for (tr of json.data) $('tbody', that).append(tr);
                                         //Empty test
