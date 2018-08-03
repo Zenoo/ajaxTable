@@ -507,6 +507,7 @@ const _ajaxTable = [];
                                             if(!json.data.length) $('tbody', that).append('<tr><td class="empty" colspan="'+_ajaxTable[i].columns+'">' + (lang.toLowerCase().includes('fr') ? "Aucune donnée disponible dans le tableau" : "No data available") + '</td></tr>');
                         
                                             if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
+                                            _ajaxTable[i].filteredTotal = json.total;
                                             updateNav(utilities, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                             LOADER.disable();
                                             resolve();
