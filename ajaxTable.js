@@ -591,6 +591,7 @@ const _ajaxTable = [];
                                 
                                         if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                         _ajaxTable[i].page = 1;
+                                        _ajaxTable[i].filteredTotal = json.total;
                                         updateNav(utilities, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
                                         LOADER.disable();
                                         settings.onUpdate.call(undefined, that, _ajaxTable[i]);
