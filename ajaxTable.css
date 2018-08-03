@@ -1,11 +1,11 @@
-.ajax-table-processed {
+body .ajax-table-processed {
   width: 100%;
   border-collapse: separate;
   border: 1px solid #dddddd;
   border-spacing: 0;
   font-family: sans-serif;
 }
-.ajax-table-processed thead tr th {
+body .ajax-table-processed thead tr th {
   position: relative;
   border: 1px solid #dddddd;
   border-top: none;
@@ -16,7 +16,7 @@
   font-weight: bold;
   vertical-align: middle;
 }
-.ajax-table-processed thead tr th:after {
+body .ajax-table-processed thead tr th:after {
   position: absolute;
   right: 11px;
   top: 50%;
@@ -24,45 +24,45 @@
   content: '\2193';
   opacity: 0.5;
 }
-.ajax-table-processed thead tr th.sorted:after {
+body .ajax-table-processed thead tr th.sorted:after {
   opacity: 1;
 }
-.ajax-table-processed thead tr th.sorted.inverted:after {
+body .ajax-table-processed thead tr th.sorted.inverted:after {
   content: '\2191';
 }
-.ajax-table-processed tfoot {
+body .ajax-table-processed tfoot {
   display: table-header-group;
 }
-.ajax-table-processed tfoot tr td {
+body .ajax-table-processed tfoot tr td {
   border: 1px solid #dddddd;
   padding: 8px;
   background: #bbbbbb;
 }
-.ajax-table-processed tfoot tr td input {
+body .ajax-table-processed tfoot tr td input {
   width: 100%;
   padding: 3px;
   box-sizing: border-box;
   font-weight: bold;
 }
-.ajax-table-processed tfoot tr td input::placeholder {
+body .ajax-table-processed tfoot tr td input::placeholder {
   color: red;
   font-size: 11px;
 }
-.ajax-table-processed tbody tr:last-of-type td {
+body .ajax-table-processed tbody tr:last-of-type td {
   border-bottom: none;
 }
-.ajax-table-processed tbody tr td {
+body .ajax-table-processed tbody tr td {
   border-left: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
   padding: 8px;
 }
-.ajax-table-processed tbody tr td:first-of-type {
+body .ajax-table-processed tbody tr td:first-of-type {
   border-left: none;
 }
-.ajax-table-processed tbody tr td.empty {
+body .ajax-table-processed tbody tr td.empty {
   text-align: center;
 }
-.ajax-table-utilities {
+body .ajax-table-utilities {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -75,15 +75,15 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.ajax-table-utilities .ajax-table-pagination,
-.ajax-table-utilities .ajax-table-buttons {
+body .ajax-table-utilities .ajax-table-pagination,
+body .ajax-table-utilities .ajax-table-buttons {
   display: inline-block;
   min-width: -moz-fit-content;
   min-width: fit-content;
   margin: 5px;
 }
-.ajax-table-utilities .ajax-table-pagination ul,
-.ajax-table-utilities .ajax-table-buttons ul {
+body .ajax-table-utilities .ajax-table-pagination ul,
+body .ajax-table-utilities .ajax-table-buttons ul {
   list-style-type: none;
   padding-left: 0;
   margin-bottom: 0;
@@ -93,8 +93,8 @@
   -o-display: inline-flex;
   display: inline-flex;
 }
-.ajax-table-utilities .ajax-table-pagination ul li,
-.ajax-table-utilities .ajax-table-buttons ul li {
+body .ajax-table-utilities .ajax-table-pagination ul li,
+body .ajax-table-utilities .ajax-table-buttons ul li {
   display: inline-block;
   border: 1px solid #dddddd;
   border-right: none;
@@ -108,45 +108,45 @@
   min-width: -moz-fit-content;
   padding: 0 5px;
 }
-.ajax-table-utilities .ajax-table-pagination ul li:first-of-type,
-.ajax-table-utilities .ajax-table-buttons ul li:first-of-type {
+body .ajax-table-utilities .ajax-table-pagination ul li:first-of-type,
+body .ajax-table-utilities .ajax-table-buttons ul li:first-of-type {
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
 }
-.ajax-table-utilities .ajax-table-pagination ul li:last-of-type,
-.ajax-table-utilities .ajax-table-buttons ul li:last-of-type {
+body .ajax-table-utilities .ajax-table-pagination ul li:last-of-type,
+body .ajax-table-utilities .ajax-table-buttons ul li:last-of-type {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-right: 1px solid #dddddd;
 }
-.ajax-table-utilities .ajax-table-pagination ul li.pagination-page,
-.ajax-table-utilities .ajax-table-buttons ul li.pagination-page,
-.ajax-table-utilities .ajax-table-pagination ul li.pagination-prev:not(.disabled),
-.ajax-table-utilities .ajax-table-buttons ul li.pagination-prev:not(.disabled),
-.ajax-table-utilities .ajax-table-pagination ul li.pagination-next:not(.disabled),
-.ajax-table-utilities .ajax-table-buttons ul li.pagination-next:not(.disabled),
-.ajax-table-utilities .ajax-table-pagination ul li.export,
-.ajax-table-utilities .ajax-table-buttons ul li.export {
+body .ajax-table-utilities .ajax-table-pagination ul li.pagination-page,
+body .ajax-table-utilities .ajax-table-buttons ul li.pagination-page,
+body .ajax-table-utilities .ajax-table-pagination ul li.pagination-prev:not(.disabled),
+body .ajax-table-utilities .ajax-table-buttons ul li.pagination-prev:not(.disabled),
+body .ajax-table-utilities .ajax-table-pagination ul li.pagination-next:not(.disabled),
+body .ajax-table-utilities .ajax-table-buttons ul li.pagination-next:not(.disabled),
+body .ajax-table-utilities .ajax-table-pagination ul li.export,
+body .ajax-table-utilities .ajax-table-buttons ul li.export {
   cursor: pointer;
 }
-.ajax-table-utilities .ajax-table-pagination ul li.active,
-.ajax-table-utilities .ajax-table-buttons ul li.active {
+body .ajax-table-utilities .ajax-table-pagination ul li.active,
+body .ajax-table-utilities .ajax-table-buttons ul li.active {
   background: rgba(128, 128, 128, 0.4);
 }
-.ajax-table-utilities .ajax-table-pagination ul li.disabled,
-.ajax-table-utilities .ajax-table-buttons ul li.disabled {
+body .ajax-table-utilities .ajax-table-pagination ul li.disabled,
+body .ajax-table-utilities .ajax-table-buttons ul li.disabled {
   color: grey;
 }
-.ajax-table-utilities .ajax-table-pagination {
+body .ajax-table-utilities .ajax-table-pagination {
   text-align: right;
 }
-.ajax-table-utilities .ajax-table-buttons {
+body .ajax-table-utilities .ajax-table-buttons {
   width: 130px;
 }
-.ajax-table-utilities .ajax-table-count {
+body .ajax-table-utilities .ajax-table-count {
   display: inline-block;
 }
-.ajax-table-utilities .ajax-table-count > div {
+body .ajax-table-utilities .ajax-table-count > div {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
