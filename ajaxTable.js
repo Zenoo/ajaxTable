@@ -573,16 +573,6 @@ const _ajaxTable = [];
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
 								LOADER.enable();
-								console.log({
-                                    page: _ajaxTable[i].page,
-                                    orderBy: _ajaxTable[i].orderBy,
-                                    order: _ajaxTable[i].orderSort,
-                                    search: _ajaxTable[i].search,
-                                    searchPatterns: _ajaxTable[i].searchPatterns,
-                                    columns: _ajaxTable[i].columns,
-                                    total: true,
-                                    context: settings.sourceContext
-                                });
                                 $.post(settings.source, {
                                     page: _ajaxTable[i].page,
                                     orderBy: _ajaxTable[i].orderBy,
