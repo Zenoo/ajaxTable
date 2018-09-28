@@ -573,7 +573,7 @@ const _ajaxTable = [];
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
 								LOADER.enable();
-								DEF.log({
+								console.log({
                                     page: _ajaxTable[i].page,
                                     orderBy: _ajaxTable[i].orderBy,
                                     order: _ajaxTable[i].orderSort,
