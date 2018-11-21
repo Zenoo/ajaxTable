@@ -14,10 +14,10 @@ Simply import JQuery, those 3 packages & ajaxTable into your HTML.
 <link rel="stylesheet" href="slick-loader/slick-loader.css">
 <link rel="stylesheet" href="ajaxTable.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="slick-loader/slick-loader.js"></script>
-<script type="text/javascript" src="csv-exporter/csvExport.js"></script>
-<script type="text/javascript" src="jquery-excel-export/excel-export.js"></script>
-<script type="text/javascript" src="ajaxTable.js"></script>
+<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/slick-loader/v1.1.3/slick-loader.min.js"></script>
+<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/JQuery-csvExport/master/csvExport.js"></script>
+<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/excel-export/master/excel-export.js"></script>
+<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/ajaxTable/master/ajaxTable.js"></script>
 ```
 * **How to use**
 

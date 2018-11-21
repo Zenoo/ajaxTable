@@ -149,7 +149,7 @@ const _ajaxTable = [];
                     if (settings.source && !_ajaxTable[i].dataFullyLoaded && ((!_ajaxTable[i].activeSearch && !_ajaxTable[i].silentData[targetedPage]) || _ajaxTable[i].activeSearch)) {
                         settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
                         if (settings.logging) console.log('ajaxTable calling source...');
-                        LOADER.enable();
+                        SlickLoader.enable();
                         $.post(settings.source, {
                             page: targetedPage,
                             orderBy: _ajaxTable[i].orderBy,
@@ -173,14 +173,14 @@ const _ajaxTable = [];
                                 } else {
                                     if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                 }
-                                LOADER.disable();
+                                SlickLoader.disable();
                                 resolve(json.total);
                             })
                             .fail((_, textStatus, error) => {
                                 let err = "Request Failed: " + textStatus + ", " + error;
                                 console.log(_);
                                 console.log(err);
-                                LOADER.disable();
+                                SlickLoader.disable();
                                 reject(err);
                             });
                         //              AJAX      &&        NOT FULLY LOADED        &&               STORED
@@ -298,7 +298,7 @@ const _ajaxTable = [];
                         settings.beforeAjax.call(undefined, that, bundle);
                         if (settings.logging) console.log('ajaxTable calling source...');
 
-                        LOADER.enable();
+                        SlickLoader.enable();
                         $.post(settings.source, {
                             total: true,
                             context: settings.sourceContext
@@ -316,14 +316,14 @@ const _ajaxTable = [];
                                 bundle.filteredTotal = json.total;
                                 bundle.searchPatterns = $('tbody tr:nth-of-type(1) td', that).get().map(e => e.getAttribute('data-search-template'));
                                 if (settings.logging) console.log('ajaxTable recieved ' + json.data.length + ' items.');
-                                LOADER.disable();
+                                SlickLoader.disable();
                                 resolve();
                             })
                             .fail((_, textStatus, error) => {
                                 let err = "Request Failed: " + textStatus + ", " + error;
                                 console.log(_);
                                 console.log(err);
-                                LOADER.disable();
+                                SlickLoader.disable();
                                 reject(err);
                             });
                     } else {
@@ -422,7 +422,7 @@ const _ajaxTable = [];
                             if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
-                                LOADER.enable();
+                                SlickLoader.enable();
                                 $.post(settings.source, {
                                     page: _ajaxTable[i].page,
                                     orderBy: _ajaxTable[i].orderBy,
@@ -441,14 +441,14 @@ const _ajaxTable = [];
                                         if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
 
                                         updateNav(utilities, 1, pageCount, i);
-                                        LOADER.disable();
+                                        SlickLoader.disable();
                                         resolve();
                                     })
                                     .fail((_, textStatus, error) => {
                                         let err = "Request Failed: " + textStatus + ", " + error;
                                         console.log(_);
                                         console.log(err);
-                                        LOADER.disable();
+                                        SlickLoader.disable();
                                         reject(err);
                                     });
                             } else {
@@ -489,7 +489,7 @@ const _ajaxTable = [];
                                 if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
                                     settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                     if (settings.logging) console.log('ajaxTable calling source...');
-                                    LOADER.enable();
+                                    SlickLoader.enable();
                                     $.post(settings.source, {
                                         page: _ajaxTable[i].page,
                                         orderBy: _ajaxTable[i].orderBy,
@@ -509,14 +509,14 @@ const _ajaxTable = [];
                                             if (settings.logging) console.log('ajaxTable temporally recieved ' + json.data.length + ' items.');
                                             _ajaxTable[i].filteredTotal = json.total;
                                             updateNav(utilities, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
-                                            LOADER.disable();
+                                            SlickLoader.disable();
                                             resolve();
                                         })
                                         .fail((_, textStatus, error) => {
                                             let err = "Request Failed: " + textStatus + ", " + error;
                                             console.log(_);
                                             console.log(err);
-                                            LOADER.disable();
+                                            SlickLoader.disable();
                                             reject(err);
                                         });
                                 } else {
@@ -572,7 +572,7 @@ const _ajaxTable = [];
                             if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
-                                LOADER.enable();
+                                SlickLoader.enable();
                                 $.post(settings.source, {
                                     page: _ajaxTable[i].page,
                                     orderBy: _ajaxTable[i].orderBy,
@@ -593,14 +593,14 @@ const _ajaxTable = [];
                                         _ajaxTable[i].page = 1;
                                         _ajaxTable[i].filteredTotal = json.total;
                                         updateNav(utilities, _ajaxTable[i].page, Math.floor((json.total - 1) / 10) + 1, i);
-                                        LOADER.disable();
+                                        SlickLoader.disable();
                                         settings.onUpdate.call(undefined, that, _ajaxTable[i]);
                                     })
                                     .fail((_, textStatus, error) => {
                                         let err = "Request Failed: " + textStatus + ", " + error;
                                         console.log(_);
                                         console.log(err);
-                                        LOADER.disable();
+                                        SlickLoader.disable();
                                     });
                             } else {
                                 _ajaxTable[i].filteredData = _ajaxTable[i].data;
