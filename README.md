@@ -11,8 +11,8 @@ Handle your table display asynchronously
 ajaxTable uses [slick-loader](https://www.npmjs.com/package/slick-loader), [csvexporter](https://www.npmjs.com/package/csvexporter) and [jQuery-excel-exporter](https://www.npmjs.com/package/jquery-excel-exporter)  
 Simply import JQuery, those 3 packages & ajaxTable into your HTML.
 ```
-<link rel="stylesheet" href="slick-loader/slick-loader.css">
-<link rel="stylesheet" href="ajaxTable.css">
+<link rel="stylesheet" href="https://gitcdn.link/repo/Zenoo/slick-loader/v1.1.3/slick-loader.css">
+<link rel="stylesheet" href="https://gitcdn.link/repo/Zenoo/ajaxTable/master/ajaxTable.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/slick-loader/v1.1.3/slick-loader.min.js"></script>
 <script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/JQuery-csvExport/master/csvExport.js"></script>
