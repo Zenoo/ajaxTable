@@ -218,9 +218,10 @@ const _ajaxTable = [];
                     .done(json => {
                         _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
                         if (settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items. (page ' + page + ')');
-                        if (page < (Math.floor((_ajaxTable[i].total - 1) / 10) + 1)) silentLoad(page + 1, i);
+                        if (page < (Math.floor((_ajaxTable[i].total - 1) / 10) + 1)) silentLoad(page + 1, i, table);
                         else {
-                            _ajaxTable[i].dataFullyLoaded = true;
+							_ajaxTable[i].dataFullyLoaded = true;
+							table.nextElementSibling.firstElementChild.classList.add('available');
                             _ajaxTable[i].data = [].concat(...Object.values(_ajaxTable[i].silentData));
                             _ajaxTable[i].filteredData = _ajaxTable[i].data;
 
@@ -240,7 +241,7 @@ const _ajaxTable = [];
                         let err = "Request Failed: " + textStatus + ", " + error;
                         console.log(_);
                         console.log(err);
-                        silentLoad(page, i);
+                        silentLoad(page, i, table);
                     });
             }
 
@@ -380,28 +381,39 @@ const _ajaxTable = [];
                     //Print click handlers
                     if(settings.printButtons){
                         utilities.on('click','.ajax-table-buttons li',function(){
+							SlickLoader.enable();
+
+							const 
+								table = document.createElement('table'),
+								tbody = document.createElement('tbody');
+
+							table.appendChild($('thead', that).clone()[0]);
+							table.appendChild(tbody);
+
+							_ajaxTable[i].filteredData.forEach(line => {
+								tbody.appendChild(line);
+							});
+
                             switch ($(this).index()) {
-                                case 0:
-                                    $(that).excelExport();
+								case 0:
+									$(table).excelExport();
                                     break;
                                 case 1:
-                                    let tableToPrint = $(that).clone();
-                                    $('tfoot',tableToPrint).remove();
-                                    tableToPrint.csvExport();
+                                    $(table).csvExport();
                                     break;
                                 case 2:
                                     let iframe = $('<iframe class="excel-export" style="visibility: hidden; position: absolute; top:0; right:0;"></iframe>').appendTo('body');
-                                    tableToPDF = $(that).clone();
-                                    $('tfoot',tableToPDF).remove();
-                                    iframe.contents().find('body').append(tableToPDF);
-                                    iframe.contents().find('head').append('<link rel="stylesheet" href="https://rawgit.com/Zenoo/ajaxTable/master/ajaxTable.css">');
+                                    iframe.contents().find('body').append(table);
+                                    iframe.contents().find('head').append('<link rel="stylesheet" href="https://rawgit.com/Zenoo/ajaxTable/master/ajaxTable.min.css">');
                                     
                                     iframe[0].contentWindow.print();
                                     iframe.remove();
                                     break;
                                 default:
-                                    break;
-                            }
+									break;
+							}
+							
+							SlickLoader.disable();
                         });
                     }
 
@@ -625,8 +637,11 @@ const _ajaxTable = [];
                         }
                     }
 
-                    if (Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1 && settings.source) silentLoad(2, i);
-                    else _ajaxTable[i].dataFullyLoaded = true;
+                    if (Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1 && settings.source) silentLoad(2, i, that);
+                    else{
+						_ajaxTable[i].dataFullyLoaded = true;
+						$('.ajax-table-buttons', utilities).addClass('available');
+					}
                 }).catch(err => {
                     alert(err);
                 });
