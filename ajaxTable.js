@@ -539,7 +539,7 @@ const _ajaxTable = [];
 										
 										// Wildcard search
 										if(this.value.includes('*')){
-											let regex = new RegExp(this.value.toLowerCase().split('*').map(s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('.*'));
+											let regex = new RegExp(this.value.toLowerCase().split('*').map(s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('.*').replace(/\s+/g, '\\s+'));
 
 											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? regex.test(tr.childNodes[index].attr('data-search').toLowerCase()) || regex.test(tr.childNodes[index].innerText.toLowerCase()) : regex.test(tr.childNodes[index].innerText.toLowerCase()));
 										}else{
