@@ -535,8 +535,17 @@ const _ajaxTable = [];
                                     _ajaxTable[i].filteredData = _ajaxTable[i].data;
 
                                     $('tfoot input', that).filter((_, e) => e.value).each(function () {
-                                        let index = $(this).parent().index();
-                                        _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value.toLowerCase()) : tr.childNodes[index].innerText.toLowerCase().includes(this.value.toLowerCase()));
+										let index = $(this).parent().index();
+										
+										// Wildcard search
+										if(this.value.includes('*')){
+											let regex = new RegExp(this.value.toLowerCase().split('*').map(s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('.*'));
+
+											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? regex.test(tr.childNodes[index].attr('data-search').toLowerCase()) || regex.test(tr.childNodes[index].innerText.toLowerCase()) : regex.test(tr.childNodes[index].innerText.toLowerCase()));
+										}else{
+											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value.toLowerCase()) : tr.childNodes[index].innerText.toLowerCase().includes(this.value.toLowerCase()));
+										}
+										
                                     });
 
                                     _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
