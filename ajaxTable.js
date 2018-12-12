@@ -495,7 +495,7 @@ const _ajaxTable = [];
                         if (e.keyCode == 13 || e.type == 'blur' && this.value != _ajaxTable[i].search[$(this).parent().index()]) {
                             _ajaxTable[i].search[$(this).parent().index()] = this.value;
                             _ajaxTable[i].activeSearch = !!_ajaxTable[i].search.filter(e => e.length).length;
-                            _ajaxTable[i].page = 1;
+							_ajaxTable[i].page = 1;
 
                             let searchPromise = new Promise((resolve, reject) => {
                                 if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
@@ -532,21 +532,22 @@ const _ajaxTable = [];
                                             reject(err);
                                         });
                                 } else {
-                                    _ajaxTable[i].filteredData = _ajaxTable[i].data;
+									_ajaxTable[i].filteredData = _ajaxTable[i].data;
+									
+									Array.from(that.querySelectorAll('tfoot input')).filter(search => search.value).forEach(filter => {
+										let index = Array.from(filter.parentElement.parentElement.children).indexOf(filter.parentElement);
 
-                                    $('tfoot input', that).filter((_, e) => e.value).each(function () {
-										let index = $(this).parent().index();
-										
+										console.log(index);
+
 										// Wildcard search
-										if(this.value.includes('*')){
-											let regex = new RegExp(this.value.toLowerCase().split('*').map(s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('.*').replace(/\s+/g, '\\s+'));
+										if(filter.value.includes('*')){
+											let regex = new RegExp(filter.value.toLowerCase().split('*').map(s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('.*').replace(/\s+/g, '\\s+'), 's');
 
 											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? regex.test(tr.childNodes[index].attr('data-search').toLowerCase()) || regex.test(tr.childNodes[index].innerText.toLowerCase()) : regex.test(tr.childNodes[index].innerText.toLowerCase()));
 										}else{
-											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value.toLowerCase()) : tr.childNodes[index].innerText.toLowerCase().includes(this.value.toLowerCase()));
+											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(filter.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(filter.value.toLowerCase()) : tr.childNodes[index].innerText.toLowerCase().includes(filter.value.toLowerCase()));
 										}
-										
-                                    });
+									});
 
                                     _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
 
