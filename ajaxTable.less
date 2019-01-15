@@ -2,6 +2,30 @@
 @header: #BBB;
 
 @ajaxTable: {
+	@-webkit-keyframes ajax-table-loader {
+		0%,
+		80%,
+		100% {
+			box-shadow: 0 0;
+			height: 4em;
+		}
+		40% {
+			box-shadow: 0 -2em;
+			height: 5em;
+		}
+	}
+	@keyframes ajax-table-loader {
+		0%,
+		80%,
+		100% {
+			box-shadow: 0 0;
+			height: 4em;
+		}
+		40% {
+			box-shadow: 0 -2em;
+			height: 5em;
+		}
+	}
     .ajax-table-processed{
         width: 100%;
         border-collapse: separate;
@@ -106,19 +130,24 @@
         -o-display: flex;
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
+		flex-wrap: wrap;
+		margin-top: 10px;
         
         //PAGINATION
         .ajax-table-pagination,.ajax-table-buttons{
+			position: relative;
             display: inline-block;
             min-width: -moz-fit-content;
             min-width: fit-content;
             margin: 5px;
 
             ul{
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
                 list-style-type: none;
                 padding-left: 0;
-                margin-bottom: 0;
+                margin: 0;
                 -webkit-display: inline-flex;
                 -moz-display: inline-flex;
                 -ms-display: inline-flex;
@@ -168,7 +197,50 @@
     
         .ajax-table-pagination{
             text-align: right;
-        }
+		}
+
+		.ajax-table-buttons-loader>div,.ajax-table-buttons-loader>div:before,.ajax-table-buttons-loader>div:after{
+			background: grey;
+			-webkit-animation: ajax-table-loader 1s infinite ease-in-out;
+			animation: ajax-table-loader 1s infinite ease-in-out;
+			width: 1em;
+			height: 30px;
+		}
+
+		.ajax-table-buttons-loader{
+			&>div{
+				position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+				color: grey;
+				text-indent: -9999em;
+				position: relative;
+				font-size: 4px;
+				-webkit-animation-delay: -0.16s;
+				animation-delay: -0.16s;
+				margin-left: 12px;
+
+				&:before,&:after{
+					position: absolute;
+					top: 0;
+					content: '';
+				}
+
+				&:before{
+					left: -1.5em;
+					-webkit-animation-delay: -0.32s;
+					animation-delay: -0.32s;
+				}
+
+				&:after{
+					left: 1.5em;
+				}
+			}
+
+			&.loaded{
+				display: none;
+			}
+		}
 
         .ajax-table-buttons{
 			display: none;

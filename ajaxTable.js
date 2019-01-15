@@ -221,7 +221,10 @@ const _ajaxTable = [];
                         if (page < (Math.floor((_ajaxTable[i].total - 1) / 10) + 1)) silentLoad(page + 1, i, table);
                         else {
 							_ajaxTable[i].dataFullyLoaded = true;
-							table.nextElementSibling.firstElementChild.classList.add('available');
+							if(settings.printButtons){
+								table.nextElementSibling.querySelector('.ajax-table-buttons-loader').classList.add('loaded');
+								table.nextElementSibling.querySelector('.ajax-table-buttons').classList.add('available');
+							}
                             _ajaxTable[i].data = [].concat(...Object.values(_ajaxTable[i].silentData));
                             _ajaxTable[i].filteredData = _ajaxTable[i].data;
 
@@ -355,6 +358,7 @@ const _ajaxTable = [];
                     //PRINT BUTTONS
                     let utilities = $('<div class="ajax-table-utilities"></div>');
 
+                    if(settings.printButtons) utilities.append('<aside class="ajax-table-buttons-loader"><div></div></aside>');
                     if(settings.printButtons) utilities.append('<aside class="ajax-table-buttons"><ul><li class="export">Excel</li><li class="export">CSV</li><li class="export">PDF</li></ul></aside>');      
                     utilities.append(count);
                     utilities.append(pagination);
@@ -650,7 +654,11 @@ const _ajaxTable = [];
                     if (Math.floor((_ajaxTable[i].total - 1) / 10) + 1 > 1 && settings.source) silentLoad(2, i, that);
                     else{
 						_ajaxTable[i].dataFullyLoaded = true;
-						$('.ajax-table-buttons', utilities).addClass('available');
+
+						if(settings.printButtons){
+							utilities[0].querySelector('.ajax-table-buttons').classList.add('available');
+							utilities[0].querySelector('.ajax-table-buttons-loader').classList.add('loaded');
+						}
 					}
                 }).catch(err => {
                     alert(err);
