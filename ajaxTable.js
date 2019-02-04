@@ -204,6 +204,7 @@ const _ajaxTable = [];
                     updateNav(pagination.parent(), targetedPage, Math.floor((items - 1) / 10) + 1, i);
                     settings.onUpdate.call(undefined, table, _ajaxTable[i]);
                 }).catch(err => {
+					console.warn(err);
                     alert(err);
                 });
             }
@@ -490,6 +491,7 @@ const _ajaxTable = [];
                             saveState(i);
                             settings.onUpdate.call(undefined, that, _ajaxTable[i]);
                         }).catch(error => {
+							console.warn(err);
                             alert(error);
                         });
                     });
@@ -564,6 +566,7 @@ const _ajaxTable = [];
                                 saveState(i);
                                 settings.onUpdate.call(undefined, that, _ajaxTable[i]);
                             }).catch(error => {
+								console.warn(err);
                                 alert(error);
                             });
                         }
@@ -661,6 +664,7 @@ const _ajaxTable = [];
 						}
 					}
                 }).catch(err => {
+					console.warn(err);
                     alert(err);
                 });
             });
