@@ -150,18 +150,22 @@ const _ajaxTable = [];
                     if (settings.source && !_ajaxTable[i].dataFullyLoaded && ((!_ajaxTable[i].activeSearch && !_ajaxTable[i].silentData[targetedPage]) || _ajaxTable[i].activeSearch)) {
                         settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
                         if (settings.logging) console.log('ajaxTable calling source...');
-                        SlickLoader.enable();
-                        $.post(settings.source, {
-                            page: targetedPage,
-                            orderBy: _ajaxTable[i].orderBy,
-                            order: _ajaxTable[i].orderSort,
-                            search: _ajaxTable[i].search,
-                            searchPatterns: _ajaxTable[i].searchPatterns,
-                            columns: _ajaxTable[i].columns,
-                            total: true,
-							context: settings.sourceContext,
-							contentType: settings.contentType
-                        }, () => {}, 'json')
+						SlickLoader.enable();
+						$.post({
+							url: settings.source,
+							data: {
+								page: targetedPage,
+								orderBy: _ajaxTable[i].orderBy,
+								order: _ajaxTable[i].orderSort,
+								search: _ajaxTable[i].search,
+								searchPatterns: _ajaxTable[i].searchPatterns,
+								columns: _ajaxTable[i].columns,
+								total: true,
+								context: settings.sourceContext
+							},
+							contentType: settings.contentType,
+							dataType: 'json'
+						})
                             .done(json => {
                                 $('tbody', table).empty();
                                 for (tr of json.data) $('tbody', table).append(tr);
@@ -213,12 +217,16 @@ const _ajaxTable = [];
 
             function silentLoad(page, i, table) {
                 settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
-                if (settings.logging) console.log('ajaxTable calling source...');
-                $.post(settings.source, {
-                    page: page,
-                    context: settings.sourceContext,
-					contentType: settings.contentType
-                }, () => {}, 'json')
+				if (settings.logging) console.log('ajaxTable calling source...');
+				$.post({
+					url: settings.source,
+					data: {
+						page: page,
+						context: settings.sourceContext
+					},
+					contentType: settings.contentType,
+					dataType: 'json'
+				})
                     .done(json => {
                         _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
                         if (settings.logging) console.log('ajaxTable silently recieved ' + json.data.length + ' items. (page ' + page + ')');
@@ -306,12 +314,16 @@ const _ajaxTable = [];
                         settings.beforeAjax.call(undefined, that, bundle);
                         if (settings.logging) console.log('ajaxTable calling source...');
 
-                        SlickLoader.enable();
-                        $.post(settings.source, {
-                            total: true,
-                            context: settings.sourceContext,
+						SlickLoader.enable();
+						$.post({
+							url: settings.source,
+							data: {
+								total: true,
+								context: settings.sourceContext
+							},
+							dataType: 'json',
 							contentType: settings.contentType
-                        }, () => {}, 'json')
+						})
                             .done(json => {
                                 $('tbody', this).empty();
                                 for (tr of json.data) $('tbody', this).append(tr);
@@ -443,17 +455,21 @@ const _ajaxTable = [];
                             if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
-                                SlickLoader.enable();
-                                $.post(settings.source, {
-                                    page: _ajaxTable[i].page,
-                                    orderBy: _ajaxTable[i].orderBy,
-                                    order: _ajaxTable[i].orderSort,
-                                    search: _ajaxTable[i].search,
-                                    searchPatterns: _ajaxTable[i].searchPatterns,
-                                    columns: _ajaxTable[i].columns,
-                                    context: settings.sourceContext,
-									contentType: settings.contentType
-                                }, () => {}, 'json')
+								SlickLoader.enable();
+								$.post({
+									url: settings.source,
+									data: {
+										page: _ajaxTable[i].page,
+										orderBy: _ajaxTable[i].orderBy,
+										order: _ajaxTable[i].orderSort,
+										search: _ajaxTable[i].search,
+										searchPatterns: _ajaxTable[i].searchPatterns,
+										columns: _ajaxTable[i].columns,
+										context: settings.sourceContext
+									},
+									contentType: settings.contentType,
+									dataType: 'json'
+								})
                                     .done(json => {
                                         $('tbody', that).empty();
                                         for (tr of json.data) $('tbody', that).append(tr);
@@ -512,18 +528,22 @@ const _ajaxTable = [];
                                 if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
                                     settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                     if (settings.logging) console.log('ajaxTable calling source...');
-                                    SlickLoader.enable();
-                                    $.post(settings.source, {
-                                        page: _ajaxTable[i].page,
-                                        orderBy: _ajaxTable[i].orderBy,
-                                        order: _ajaxTable[i].orderSort,
-                                        search: _ajaxTable[i].search,
-                                        searchPatterns: _ajaxTable[i].searchPatterns,
-                                        columns: _ajaxTable[i].columns,
-                                        total: true,
-                                        context: settings.sourceContext,
-										contentType: settings.contentType
-                                    }, () => {}, 'json')
+									SlickLoader.enable();
+									$.post({
+										url: settings.source,
+										data: {
+											page: _ajaxTable[i].page,
+											orderBy: _ajaxTable[i].orderBy,
+											order: _ajaxTable[i].orderSort,
+											search: _ajaxTable[i].search,
+											searchPatterns: _ajaxTable[i].searchPatterns,
+											columns: _ajaxTable[i].columns,
+											total: true,
+											context: settings.sourceContext
+										},
+										contentType: settings.contentType,
+										dataType: 'json'
+									})
                                         .done(json => {
                                             $('tbody', that).empty();
                                             for (tr of json.data) $('tbody', that).append(tr);
@@ -607,18 +627,22 @@ const _ajaxTable = [];
                             if (settings.source && !_ajaxTable[i].dataFullyLoaded) {
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
-                                SlickLoader.enable();
-                                $.post(settings.source, {
-                                    page: _ajaxTable[i].page,
-                                    orderBy: _ajaxTable[i].orderBy,
-                                    order: _ajaxTable[i].orderSort,
-                                    search: _ajaxTable[i].search,
-                                    searchPatterns: _ajaxTable[i].searchPatterns,
-                                    columns: _ajaxTable[i].columns,
-                                    total: true,
-                                    context: settings.sourceContext,
-									contentType: settings.contentType
-                                }, () => {}, 'json')
+								SlickLoader.enable();
+								$.post({
+									url: settings.source,
+									data: {
+										page: _ajaxTable[i].page,
+										orderBy: _ajaxTable[i].orderBy,
+										order: _ajaxTable[i].orderSort,
+										search: _ajaxTable[i].search,
+										searchPatterns: _ajaxTable[i].searchPatterns,
+										columns: _ajaxTable[i].columns,
+										total: true,
+										context: settings.sourceContext
+									},
+									contentType: settings.contentType,
+									dataType: 'json'
+								})
                                     .done(json => {
                                         $('tbody', that).empty();
                                         for (tr of json.data) $('tbody', that).append(tr);
