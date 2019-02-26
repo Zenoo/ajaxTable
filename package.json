@@ -9,7 +9,7 @@
     "jquery-plugin",
     "ecosystem:jquery"
   ],
-  "version": "1.10.5",
+  "version": "1.10.6",
   "author": {
     "name": "Zenoo",
     "url": "https://github.com/Zenoo"
