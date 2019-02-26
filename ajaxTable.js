@@ -151,18 +151,21 @@ const _ajaxTable = [];
                         settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
                         if (settings.logging) console.log('ajaxTable calling source...');
 						SlickLoader.enable();
+
+						const data = {
+							page: targetedPage,
+							orderBy: _ajaxTable[i].orderBy,
+							order: _ajaxTable[i].orderSort,
+							search: _ajaxTable[i].search,
+							searchPatterns: _ajaxTable[i].searchPatterns,
+							columns: _ajaxTable[i].columns,
+							total: true,
+							context: settings.sourceContext
+						};
+
 						$.post({
 							url: settings.source,
-							data: {
-								page: targetedPage,
-								orderBy: _ajaxTable[i].orderBy,
-								order: _ajaxTable[i].orderSort,
-								search: _ajaxTable[i].search,
-								searchPatterns: _ajaxTable[i].searchPatterns,
-								columns: _ajaxTable[i].columns,
-								total: true,
-								context: settings.sourceContext
-							},
+							data: settings.contentType == 'application/json' ? JSON.stringify(data) : data,
 							contentType: settings.contentType,
 							dataType: 'json'
 						})
@@ -218,12 +221,15 @@ const _ajaxTable = [];
             function silentLoad(page, i, table) {
                 settings.beforeAjax.call(undefined, table, _ajaxTable[i]);
 				if (settings.logging) console.log('ajaxTable calling source...');
+
+				const data = {
+					page: page,
+					context: settings.sourceContext
+				};
+
 				$.post({
 					url: settings.source,
-					data: {
-						page: page,
-						context: settings.sourceContext
-					},
+					data: settings.contentType == 'application/json' ? JSON.stringify(data) : data,
 					contentType: settings.contentType,
 					dataType: 'json'
 				})
@@ -313,14 +319,16 @@ const _ajaxTable = [];
                     if (settings.source) {
                         settings.beforeAjax.call(undefined, that, bundle);
                         if (settings.logging) console.log('ajaxTable calling source...');
-
 						SlickLoader.enable();
+
+						const data = {
+							total: true,
+							context: settings.sourceContext
+						};
+
 						$.post({
 							url: settings.source,
-							data: {
-								total: true,
-								context: settings.sourceContext
-							},
+							data: settings.contentType == 'application/json' ? JSON.stringify(data) : data,
 							dataType: 'json',
 							contentType: settings.contentType
 						})
@@ -456,17 +464,20 @@ const _ajaxTable = [];
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
 								SlickLoader.enable();
+
+								const data = {
+									page: _ajaxTable[i].page,
+									orderBy: _ajaxTable[i].orderBy,
+									order: _ajaxTable[i].orderSort,
+									search: _ajaxTable[i].search,
+									searchPatterns: _ajaxTable[i].searchPatterns,
+									columns: _ajaxTable[i].columns,
+									context: settings.sourceContext
+								};
+
 								$.post({
 									url: settings.source,
-									data: {
-										page: _ajaxTable[i].page,
-										orderBy: _ajaxTable[i].orderBy,
-										order: _ajaxTable[i].orderSort,
-										search: _ajaxTable[i].search,
-										searchPatterns: _ajaxTable[i].searchPatterns,
-										columns: _ajaxTable[i].columns,
-										context: settings.sourceContext
-									},
+									data: settings.contentType == 'application/json' ? JSON.stringify(data) : data,
 									contentType: settings.contentType,
 									dataType: 'json'
 								})
@@ -529,18 +540,21 @@ const _ajaxTable = [];
                                     settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                     if (settings.logging) console.log('ajaxTable calling source...');
 									SlickLoader.enable();
+
+									const data = {
+										page: _ajaxTable[i].page,
+										orderBy: _ajaxTable[i].orderBy,
+										order: _ajaxTable[i].orderSort,
+										search: _ajaxTable[i].search,
+										searchPatterns: _ajaxTable[i].searchPatterns,
+										columns: _ajaxTable[i].columns,
+										total: true,
+										context: settings.sourceContext
+									};
+
 									$.post({
 										url: settings.source,
-										data: {
-											page: _ajaxTable[i].page,
-											orderBy: _ajaxTable[i].orderBy,
-											order: _ajaxTable[i].orderSort,
-											search: _ajaxTable[i].search,
-											searchPatterns: _ajaxTable[i].searchPatterns,
-											columns: _ajaxTable[i].columns,
-											total: true,
-											context: settings.sourceContext
-										},
+										data: settings.contentType == 'application/json' ? JSON.stringify(data) : data,
 										contentType: settings.contentType,
 										dataType: 'json'
 									})
@@ -628,18 +642,21 @@ const _ajaxTable = [];
                                 settings.beforeAjax.call(undefined, that, _ajaxTable[i]);
                                 if (settings.logging) console.log('ajaxTable calling source...');
 								SlickLoader.enable();
+
+								const data = {
+									page: _ajaxTable[i].page,
+									orderBy: _ajaxTable[i].orderBy,
+									order: _ajaxTable[i].orderSort,
+									search: _ajaxTable[i].search,
+									searchPatterns: _ajaxTable[i].searchPatterns,
+									columns: _ajaxTable[i].columns,
+									total: true,
+									context: settings.sourceContext
+								};
+
 								$.post({
 									url: settings.source,
-									data: {
-										page: _ajaxTable[i].page,
-										orderBy: _ajaxTable[i].orderBy,
-										order: _ajaxTable[i].orderSort,
-										search: _ajaxTable[i].search,
-										searchPatterns: _ajaxTable[i].searchPatterns,
-										columns: _ajaxTable[i].columns,
-										total: true,
-										context: settings.sourceContext
-									},
+									data: settings.contentType == 'application/json' ? JSON.stringify(data) : data,
 									contentType: settings.contentType,
 									dataType: 'json'
 								})
