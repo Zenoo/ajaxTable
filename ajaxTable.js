@@ -10,7 +10,7 @@ const _ajaxTable = [];
                 orderBy: 0,
                 orderSort: 'desc',
 				logging: false,
-				contentType: null,
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 onReady: function (table, data) { },
                 beforeAjax: function (table, data) { },
                 onUpdate: function (table, data) { }
