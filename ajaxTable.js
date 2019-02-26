@@ -583,8 +583,6 @@ const _ajaxTable = [];
 									Array.from(that.querySelectorAll('tfoot input')).filter(search => search.value).forEach(filter => {
 										let index = Array.from(filter.parentElement.parentElement.children).indexOf(filter.parentElement);
 
-										console.log(index);
-
 										// Wildcard search
 										if(filter.value.includes('*')){
 											let regex = new RegExp(filter.value.toLowerCase().split('*').map(s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('.*').replace(/\s+/g, '\\s+'), 's');
