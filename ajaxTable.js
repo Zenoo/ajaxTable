@@ -9,7 +9,8 @@ const _ajaxTable = [];
                 printButtons: true,
                 orderBy: 0,
                 orderSort: 'desc',
-                logging: false,
+				logging: false,
+				contentType: null,
                 onReady: function (table, data) { },
                 beforeAjax: function (table, data) { },
                 onUpdate: function (table, data) { }
@@ -158,7 +159,8 @@ const _ajaxTable = [];
                             searchPatterns: _ajaxTable[i].searchPatterns,
                             columns: _ajaxTable[i].columns,
                             total: true,
-                            context: settings.sourceContext
+							context: settings.sourceContext,
+							contentType: settings.contentType
                         }, () => {}, 'json')
                             .done(json => {
                                 $('tbody', table).empty();
@@ -214,7 +216,8 @@ const _ajaxTable = [];
                 if (settings.logging) console.log('ajaxTable calling source...');
                 $.post(settings.source, {
                     page: page,
-                    context: settings.sourceContext
+                    context: settings.sourceContext,
+					contentType: settings.contentType
                 }, () => {}, 'json')
                     .done(json => {
                         _ajaxTable[i].silentData["" + page] = json.data.map(e => htmlToElement(e));
@@ -306,7 +309,8 @@ const _ajaxTable = [];
                         SlickLoader.enable();
                         $.post(settings.source, {
                             total: true,
-                            context: settings.sourceContext
+                            context: settings.sourceContext,
+							contentType: settings.contentType
                         }, () => {}, 'json')
                             .done(json => {
                                 $('tbody', this).empty();
@@ -447,7 +451,8 @@ const _ajaxTable = [];
                                     search: _ajaxTable[i].search,
                                     searchPatterns: _ajaxTable[i].searchPatterns,
                                     columns: _ajaxTable[i].columns,
-                                    context: settings.sourceContext
+                                    context: settings.sourceContext,
+									contentType: settings.contentType
                                 }, () => {}, 'json')
                                     .done(json => {
                                         $('tbody', that).empty();
@@ -516,7 +521,8 @@ const _ajaxTable = [];
                                         searchPatterns: _ajaxTable[i].searchPatterns,
                                         columns: _ajaxTable[i].columns,
                                         total: true,
-                                        context: settings.sourceContext
+                                        context: settings.sourceContext,
+										contentType: settings.contentType
                                     }, () => {}, 'json')
                                         .done(json => {
                                             $('tbody', that).empty();
@@ -610,7 +616,8 @@ const _ajaxTable = [];
                                     searchPatterns: _ajaxTable[i].searchPatterns,
                                     columns: _ajaxTable[i].columns,
                                     total: true,
-                                    context: settings.sourceContext
+                                    context: settings.sourceContext,
+									contentType: settings.contentType
                                 }, () => {}, 'json')
                                     .done(json => {
                                         $('tbody', that).empty();

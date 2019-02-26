@@ -37,6 +37,7 @@ $('table').ajaxTable({
   orderBy: 0,              // Index of the column used to order the table
   orderSort: 'desc',       // Order direction
   logging: false,          // Should ajaxTable use the developper console?
+  contentType: null,       // Use this to manually set the content type of the requests
   onReady: function (table, data) { },     // Runs when the ajaxTable is ready
   beforeAjax: function (table, data) { },  // Runs before every AJAX call
   onUpdate: function (table, data) { }     // Runs after every table update
