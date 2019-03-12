@@ -248,7 +248,7 @@ const _ajaxTable = [];
 
                             $('tfoot input', table).filter((_, e) => e.value).each(function () {
                                 let index = $(this).parent().index();
-                                _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
+                                _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.children[index].hasAttribute('data-search') ? tr.children[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.children[index].innerText.toLowerCase().includes(this.value) : tr.children[index].innerText.toLowerCase().includes(this.value));
                             });
 
                             _ajaxTable[i].total = _ajaxTable[i].data.length;
@@ -504,13 +504,13 @@ const _ajaxTable = [];
                                 let index = $(this).index();
 
                                 _ajaxTable[i].filteredData = mergeSort(_ajaxTable[i].filteredData, (a, b) => {
-                                    let $a_dataOrder = a.childNodes[index].getAttribute('data-order');
-                                    let $b_dataOrder = b.childNodes[index].getAttribute('data-order');
+                                    let $a_dataOrder = a.children[index].getAttribute('data-order');
+                                    let $b_dataOrder = b.children[index].getAttribute('data-order');
 
-                                    let $a_text = a.childNodes[index].innerText;
-                                    let $b_text = b.childNodes[index].innerText;
+                                    let $a_text = a.children[index].innerText;
+                                    let $b_text = b.children[index].innerText;
 
-                                    return a.childNodes[index].hasAttribute('data-order') ? !isNaN($a_dataOrder) ? (+$a_dataOrder > +$b_dataOrder ? order : +$a_dataOrder == +$b_dataOrder ? 0 : -order) : $a_dataOrder.localeCompare($b_dataOrder) * order : !isNaN($a_text) ? (+$a_text > +$b_text ? order : +$a_text == +$b_text ? 0 : -order) : $a_text.localeCompare($b_text) * order;
+                                    return a.children[index].hasAttribute('data-order') ? !isNaN($a_dataOrder) ? (+$a_dataOrder > +$b_dataOrder ? order : +$a_dataOrder == +$b_dataOrder ? 0 : -order) : $a_dataOrder.localeCompare($b_dataOrder) * order : !isNaN($a_text) ? (+$a_text > +$b_text ? order : +$a_text == +$b_text ? 0 : -order) : $a_text.localeCompare($b_text) * order;
                                 });
 
                                 updateTable(that, i);
@@ -587,9 +587,9 @@ const _ajaxTable = [];
 										if(filter.value.includes('*')){
 											let regex = new RegExp(filter.value.toLowerCase().split('*').map(s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('.*').replace(/\s+/g, '\\s+'), 's');
 
-											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? regex.test(tr.childNodes[index].attr('data-search').toLowerCase()) || regex.test(tr.childNodes[index].innerText.toLowerCase()) : regex.test(tr.childNodes[index].innerText.toLowerCase()));
+											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.children[index].hasAttribute('data-search') ? regex.test(tr.children[index].attr('data-search').toLowerCase()) || regex.test(tr.children[index].innerText.toLowerCase()) : regex.test(tr.children[index].innerText.toLowerCase()));
 										}else{
-											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(filter.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(filter.value.toLowerCase()) : tr.childNodes[index].innerText.toLowerCase().includes(filter.value.toLowerCase()));
+											_ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.children[index].hasAttribute('data-search') ? tr.children[index].attr('data-search').toLowerCase().includes(filter.value.toLowerCase()) || tr.children[index].innerText.toLowerCase().includes(filter.value.toLowerCase()) : tr.children[index].innerText.toLowerCase().includes(filter.value.toLowerCase()));
 										}
 									});
 
@@ -683,7 +683,7 @@ const _ajaxTable = [];
 
                                 $('tfoot input', that).filter((_, e) => e.value).each(function () {
                                     let index = $(this).parent().index();
-                                    _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.childNodes[index].hasAttribute('data-search') ? tr.childNodes[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.childNodes[index].innerText.toLowerCase().includes(this.value) : tr.childNodes[index].innerText.toLowerCase().includes(this.value));
+                                    _ajaxTable[i].filteredData = _ajaxTable[i].filteredData.filter(tr => tr.children[index].hasAttribute('data-search') ? tr.children[index].attr('data-search').toLowerCase().includes(this.value.toLowerCase()) || tr.children[index].innerText.toLowerCase().includes(this.value) : tr.children[index].innerText.toLowerCase().includes(this.value));
                                 });
 
                                 _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
