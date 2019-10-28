@@ -12,6 +12,7 @@ const _ajaxTable = [];
 				logging: false,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 onReady: function (table, data) { },
+                onStructureReady: function (table, data) { },
                 beforeAjax: function (table, data) { },
                 onUpdate: function (table, data) { }
             };
@@ -308,6 +309,8 @@ const _ajaxTable = [];
                     $('tfoot tr', that).append('<td><input type="text" placeholder="' + (lang.toLowerCase().includes('fr') ? "Entrée pour chercher" : "Enter to search") + '"></td>')
                 });
                 bundle.search = $('tfoot input', that).get().map(e => e.value);
+                settings.onStructureReady.call(undefined, table, _ajaxTable[i]);
+				if (settings.logging) console.log('ajaxTable structure ready...');
 
                 //Only keep 10 items shown
                 if (bundle.data.length > 10) {
