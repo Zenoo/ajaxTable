@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/Zenoo/ajaxTable/compare/v1.10.10...v1.11.0) (2019-10-28)
+
+
+### Features
+
+* onReady callback was called at the wrong time ([f7341d9](https://github.com/Zenoo/ajaxTable/commit/f7341d96844969ee777f46c7b5d27faad5d93ec0))
+
 ### [1.10.10](https://github.com/Zenoo/ajaxTable/compare/v1.10.9...v1.10.10) (2019-10-28)
 
 
