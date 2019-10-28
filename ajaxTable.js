@@ -255,7 +255,10 @@ const _ajaxTable = [];
                             _ajaxTable[i].total = _ajaxTable[i].data.length;
                             _ajaxTable[i].filteredTotal = _ajaxTable[i].filteredData.length;
 
+                            //TABLE READY
                             if (settings.logging) console.log('ajaxTable is done with AJAX tasks.');
+                            if (settings.logging) console.log('ajaxTable ready.');
+                            settings.onReady.call(undefined, table, _ajaxTable[i]);
                         }
 
                     })
@@ -613,9 +616,6 @@ const _ajaxTable = [];
                         }
                     });
                     
-                    //TABLE READY
-                    if (settings.logging) console.log('ajaxTable ready.');
-                    settings.onReady.call(undefined, that, _ajaxTable[i]);
                     settings.onUpdate.call(undefined, that, _ajaxTable[i]);
 
                     //Reuse user's last sort + filter
@@ -710,7 +710,11 @@ const _ajaxTable = [];
 						if(settings.printButtons){
 							utilities[0].querySelector('.ajax-table-buttons').classList.add('available');
 							utilities[0].querySelector('.ajax-table-buttons-loader').classList.add('loaded');
-						}
+                        }
+                        
+                        //TABLE READY
+                        if (settings.logging) console.log('ajaxTable ready.');
+                        settings.onReady.call(undefined, that, _ajaxTable[i]);
 					}
                 }).catch(error => {
 					console.warn(error);
