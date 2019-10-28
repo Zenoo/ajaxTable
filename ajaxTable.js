@@ -309,7 +309,7 @@ const _ajaxTable = [];
                     $('tfoot tr', that).append('<td><input type="text" placeholder="' + (lang.toLowerCase().includes('fr') ? "Entrée pour chercher" : "Enter to search") + '"></td>')
                 });
                 bundle.search = $('tfoot input', that).get().map(e => e.value);
-                settings.onStructureReady.call(undefined, table, _ajaxTable[i]);
+                settings.onStructureReady.call(undefined, this, _ajaxTable[i]);
 				if (settings.logging) console.log('ajaxTable structure ready...');
 
                 //Only keep 10 items shown
