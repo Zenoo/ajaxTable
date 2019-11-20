@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/Zenoo/ajaxTable/compare/v1.11.0...v1.11.1) (2019-11-20)
+
+
+### Bug Fixes
+
+* Missing parentheses in search filter ([9be14c1](https://github.com/Zenoo/ajaxTable/commit/9be14c10937d37d2d5016b18d884042b27fdb435))
+
 ## [1.11.0](https://github.com/Zenoo/ajaxTable/compare/v1.10.10...v1.11.0) (2019-10-28)
 
 
