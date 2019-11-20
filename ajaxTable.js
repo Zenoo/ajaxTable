@@ -536,7 +536,7 @@ const _ajaxTable = [];
 
                     //Search handler
                     $('tfoot input', this).on('keyup blur', function (e) {
-                        if (e.keyCode == 13 || e.type == 'blur' && this.value != _ajaxTable[i].search[$(this).parent().index()]) {
+                        if ((e.keyCode == 13 || e.type == 'blur') && this.value != _ajaxTable[i].search[$(this).parent().index()]) {
                             _ajaxTable[i].search[$(this).parent().index()] = this.value;
                             _ajaxTable[i].activeSearch = !!_ajaxTable[i].search.filter(e => e.length).length;
 							_ajaxTable[i].page = 1;
