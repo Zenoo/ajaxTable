@@ -11,13 +11,13 @@ Handle your table display asynchronously
 ajaxTable uses [slick-loader](https://www.npmjs.com/package/slick-loader), [csvexporter](https://www.npmjs.com/package/csvexporter) and [jQuery-excel-exporter](https://www.npmjs.com/package/jquery-excel-exporter)  
 Simply import JQuery, those 3 packages & ajaxTable into your HTML.
 ```
-<link rel="stylesheet" href="https://gitcdn.link/repo/Zenoo/slick-loader/v1.1.3/slick-loader.min.css">
-<link rel="stylesheet" href="https://gitcdn.link/repo/Zenoo/ajaxTable/master/ajaxTable.min.css">
+<link rel="stylesheet" href="https://unpkg.com/slick-loader/slick-loader.min.css">
+<link rel="stylesheet" href="https://unpkg.com/ajax-table/ajaxTable.min.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/slick-loader/v1.1.3/slick-loader.min.js"></script>
-<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/JQuery-csvExport/master/csvExport.min.js"></script>
-<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/excel-export/master/excel-export.min.js"></script>
-<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/ajaxTable/master/ajaxTable.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/slick-loader/slick-loader.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/csvexporter/csvExport.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/jquery-excel-exporter/excel-export.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/ajax-table/ajaxTable.min.js"></script>
 ```
 * **How to use**
 

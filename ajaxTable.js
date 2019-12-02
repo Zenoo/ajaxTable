@@ -439,7 +439,7 @@ const _ajaxTable = [];
                                 case 2:
                                     let iframe = $('<iframe class="excel-export" style="visibility: hidden; position: absolute; top:0; right:0;"></iframe>').appendTo('body');
                                     iframe.contents().find('body').append(table);
-                                    iframe.contents().find('head').append('<link rel="stylesheet" href="https://rawgit.com/Zenoo/ajaxTable/master/ajaxTable.min.css">');
+                                    iframe.contents().find('head').append('<link rel="stylesheet" href="https://unpkg.com/ajax-table/ajaxTable.min.css">');
                                     
                                     iframe[0].contentWindow.print();
                                     iframe.remove();
