@@ -10,7 +10,7 @@
     "ecosystem:jquery"
   ],
   "scripts": {
-    "release": "npx standard-version -s"
+    "release": "standard-version -s"
   },
   "version": "1.11.2",
   "author": {
