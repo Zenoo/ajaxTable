@@ -440,9 +440,17 @@ const _ajaxTable = [];
                                     let iframe = $('<iframe class="excel-export" style="visibility: hidden; position: absolute; top:0; right:0;"></iframe>').appendTo('body');
                                     iframe.contents().find('body').append(table);
                                     iframe.contents().find('head').append('<link rel="stylesheet" href="https://unpkg.com/ajax-table/ajaxTable.min.css">');
-                                    
+
+                                    if(typeof window.onafterprint == 'undefined'){
+                                        setTimeout(() => {
+                                            iframe.remove();
+                                        }, 500)
+                                    }else{
+                                        iframe[0].contentWindow.onafterprint = () => { 
+                                            iframe.remove();
+                                        };
+                                    }
                                     iframe[0].contentWindow.print();
-                                    iframe.remove();
                                     break;
                                 default:
 									break;
