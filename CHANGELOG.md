@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.3](https://github.com/Zenoo/ajaxTable/compare/v1.11.2...v1.11.3) (2019-12-02)
+
+
+### Bug Fixes
+
+* PDF button triggered iframe removal too quickly ([187036f](https://github.com/Zenoo/ajaxTable/commit/187036f6956ea7fcd768ac8ed4ee723e95154e5f))
+
 ### [1.11.2](https://github.com/Zenoo/ajaxTable/compare/v1.11.1...v1.11.2) (2019-12-02)
 
 
