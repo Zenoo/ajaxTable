@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.4](https://github.com/Zenoo/ajaxTable/compare/v1.11.3...v1.11.4) (2020-03-02)
+
+
+### Bug Fixes
+
+* Populate PDF iframe with line clones ([fd93e4e](https://github.com/Zenoo/ajaxTable/commit/fd93e4e1ec530906829c1eaabe6b83af18366a68))
+
 ### [1.11.3](https://github.com/Zenoo/ajaxTable/compare/v1.11.2...v1.11.3) (2019-12-02)
 
 
