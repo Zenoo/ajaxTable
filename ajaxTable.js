@@ -426,7 +426,7 @@ const _ajaxTable = [];
 							table.appendChild(tbody);
 
 							_ajaxTable[i].filteredData.forEach(line => {
-								tbody.appendChild(line);
+								tbody.appendChild($(line).clone()[0]);
 							});
 
                             switch ($(this).index()) {
