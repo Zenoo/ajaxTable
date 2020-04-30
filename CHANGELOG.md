@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.6](https://github.com/Zenoo/ajaxTable/compare/v1.11.5...v1.11.6) (2020-04-30)
+
+
+### Bug Fixes
+
+* Dependencies vulnerabilities ([19bad0e](https://github.com/Zenoo/ajaxTable/commit/19bad0e2871df7d67cc6984d7c0ecae59f18282d))
+
 ### [1.11.5](https://github.com/Zenoo/ajaxTable/compare/v1.11.4...v1.11.5) (2020-04-30)
 
 ### [1.11.4](https://github.com/Zenoo/ajaxTable/compare/v1.11.3...v1.11.4) (2020-03-02)
