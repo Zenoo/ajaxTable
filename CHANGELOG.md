@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/Zenoo/ajaxTable/compare/v1.11.8...v1.12.0) (2021-04-08)
+
+
+### Features
+
+* New 'searchPlaceholders' parameter ([7ec56df](https://github.com/Zenoo/ajaxTable/commit/7ec56df502deaeb0f9ca88cd659a7ab42aa2117e))
+
 ### [1.11.8](https://github.com/Zenoo/ajaxTable/compare/v1.11.7...v1.11.8) (2021-03-31)
 
 
