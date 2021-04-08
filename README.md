@@ -31,13 +31,14 @@ $('table').ajaxTable({
 
 ```
 {
-  source: false,           // URL used to fetch the data. Set to false to disable AJAX loading
-  sourceContext: {},       // Optional object to pass to the server while fetching the data
-  printButtons: true,      // Should the print buttons be displayed?
-  orderBy: 0,              // Index of the column used to order the table
-  orderSort: 'desc',       // Order direction
-  logging: false,          // Should ajaxTable use the developper console?
-  contentType: null,       // Use this to manually set the content type of the requests
+  source: false,            // URL used to fetch the data. Set to false to disable AJAX loading
+  sourceContext: {},        // Optional object to pass to the server while fetching the data
+  printButtons: true,       // Should the print buttons be displayed?
+  orderBy: 0,               // Index of the column used to order the table
+  orderSort: 'desc',        // Order direction
+  logging: false,           // Should ajaxTable use the developper console?
+  contentType: null,        // Use this to manually set the content type of the requests
+  searchPlaceholders: null, // Default search placeholders (Example: ['search1', 'search2'])
   onStructureReady: function (table, data) { }, // Runs when the ajaxTable structure is ready
   onReady: function (table, data) { },          // Runs when the ajaxTable is ready
   beforeAjax: function (table, data) { },       // Runs before every AJAX call
