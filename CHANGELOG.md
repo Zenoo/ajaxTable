@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.2](https://github.com/Zenoo/ajaxTable/compare/v1.12.0...v1.12.2) (2021-07-11)
+
+
+### Bug Fixes
+
+* New workflow + babel config ([53f0bb7](https://github.com/Zenoo/ajaxTable/commit/53f0bb75a0234a6f453cb74c81411708ca2dcd6e))
+
 ## [1.12.0](https://github.com/Zenoo/ajaxTable/compare/v1.11.8...v1.12.0) (2021-04-08)
 
 
