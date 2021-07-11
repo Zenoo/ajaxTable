@@ -10,9 +10,9 @@
     "ecosystem:jquery"
   ],
   "scripts": {
-    "release": "standard-version -s"
+    "release": "babel ajaxTable.js -o ajaxTable.min.js && git add ajaxTable.min.js && git diff-index --quiet HEAD || git commit -m \"Build\" && standard-version -s"
   },
-  "version": "1.12.0",
+  "version": "1.12.1",
   "author": {
     "name": "Zenoo",
     "url": "https://github.com/Zenoo"
@@ -34,10 +34,17 @@
   "docs": "https://github.com/Zenoo/ajaxTable#readme",
   "download": "https://github.com/Zenoo/ajaxTable/archive/master.zip",
   "dependencies": {
-    "jquery": "^3.3.1"
+    "csvexporter": "^1.4.2",
+    "jquery": "^3.3.1",
+    "jquery-excel-exporter": "^1.2.1",
+    "slick-loader": "^1.1.38"
   },
   "devDependencies": {
-    "standard-version": "^9.1.1"
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "babel-preset-minify": "^0.5.1",
+    "standard-version": "^9.3.0"
   },
   "standard-version": {
     "types": [
