@@ -12,7 +12,7 @@
   "scripts": {
     "release": "babel ajaxTable.js -o ajaxTable.min.js && git add ajaxTable.min.js && git diff-index --quiet HEAD || git commit -m \"Build\""
   },
-  "version": "1.12.5",
+  "version": "1.12.6",
   "author": {
     "name": "Zenoo",
     "url": "https://github.com/Zenoo"
